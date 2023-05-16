@@ -60,52 +60,52 @@
 
         #batteryColor1{
             fill: currentColor;
-            color: #00C800;
+            color: #FFFFFF;
         }
 
         #batteryColor2{
             fill: currentColor;
-            color: #00C800;
+            color: #FFFFFF;
         }
 
         #batteryColor3{
             fill: currentColor;
-            color: #00C800;
+            color: #FFFFFF;
         }
 
         #batteryColor4{
             fill: currentColor;
-            color: #00C800;
+            color: #FFFFFF;
         }
 
         #batteryColor5{
             fill: currentColor;
-            color: #00C800;
+            color: #FFFFFF;
         }
 
         #batteryColor6{
             fill: currentColor;
-            color: #00C800;
+            color: #FFFFFF;
         }
 
         #batteryColor7{
             fill: currentColor;
-            color: #00C800;
+            color: #FFFFFF;
         }
 
         #batteryColor8{
             fill: currentColor;
-            color: #00C800;
+            color: #FFFFFF;
         }
 
         #batteryColor9{
             fill: currentColor;
-            color: #00C800;
+            color: #FFFFFF;
         }
 
         #batteryColor10{
             fill: currentColor;
-            color: #00C800;
+            color: #FFFFFF;
         }
 
         .battery-percentage{
@@ -829,10 +829,10 @@
 <body>
     <header>
     <!-- BATERY --->
-        <div class="battery-container" onclick="connection();">
+        <div class="battery-container">
             <svg class="battery" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308.69 137.06"><g><g><path class="battery" d="m301.22,34.28h-27.55V7.47c0-4.13-3.35-7.47-7.47-7.47H7.47C3.35,0,0,3.35,0,7.47v122.12c0,4.13,3.35,7.47,7.47,7.47h258.72c4.13,0,7.47-3.35,7.47-7.47v-26.71h27.55c4.13,0,7.47-3.35,7.47-7.47v-53.65c0-4.13-3.35-7.47-7.47-7.47Z"/><rect id="batteryColor1" x="10.28" y="10.01" width="20.66" height="117.05" rx="6.97" ry="6.97"/><rect id="batteryColor2" x="36.11" y="10.01" width="20.66" height="117.05" rx="6.97" ry="6.97"/><rect id="batteryColor3" x="61.93" y="10.01" width="20.66" height="117.05" rx="6.97" ry="6.97"/><rect id="batteryColor4" x="87.76" y="10.01" width="20.66" height="117.05" rx="6.97" ry="6.97"/><rect id="batteryColor5" x="113.58" y="10.01" width="20.66" height="117.05" rx="6.97" ry="6.97"/><rect id="batteryColor6" x="139.41" y="10.01" width="20.66" height="117.05" rx="6.97" ry="6.97"/><rect id="batteryColor7" x="165.24" y="10.01" width="20.66" height="117.05" rx="6.97" ry="6.97"/><rect id="batteryColor8" x="191.06" y="10.01" width="20.66" height="117.05" rx="6.97" ry="6.97"/><rect id="batteryColor9" x="216.89" y="10.01" width="20.66" height="117.05" rx="6.97" ry="6.97"/><rect id="batteryColor10" x="242.71" y="10.01" width="20.66" height="117.05" rx="6.97" ry="6.97"/></g></g></svg>
             <div class="battery-percent-container">
-                <p class="battery-percentage" id="countdown">xx%</p>
+                <p class="battery-percentage" id="countdown">-X-</p>
             </div> 
         </div>
     <!-- RPM --->
@@ -1062,6 +1062,8 @@
 				document.getElementById('scabk').style.display = 'none';
 			}
         
+// 1* Função BLE_RecvCB
+
         function BLE_RecvCB(str){
             const ob = JSON.parse(str);
             if(ob.error != undefined && ob.error != 0){
@@ -1279,11 +1281,6 @@
 
         //////////////// Animação Batery Count Down ////////////////
 
-        // let count = 100;
-        // const countdown = document.getElementById('countdown');
-        // const interval = setInterval(updateCountdown, 500);
-
-
         const color1 = document.getElementById('batteryColor1');
         const color2 = document.getElementById('batteryColor2');
         const color3 = document.getElementById('batteryColor3');
@@ -1295,112 +1292,137 @@
         const color9 = document.getElementById('batteryColor9');
         const color10 = document.getElementById('batteryColor10');
 
+// 2* Função updateCountdown
+
         function updateCountdown(str) {
             const ob = JSON.parse(str);
             const batteryPercentage = ob.stream.BAT;
             const countdown = document.getElementById('countdown');
             countdown.textContent = batteryPercentage + '%';
+
+            if (batteryPercentage >= 90) {
+                color1.style.color = '#00C800';
+                color2.style.color = '#00C800';
+                color3.style.color = '#00C800';
+                color4.style.color = '#00C800';
+                color5.style.color = '#00C800';
+                color6.style.color = '#00C800';
+                color7.style.color = '#00C800';
+                color8.style.color = '#00C800';
+                color9.style.color = '#00C800';
+                color10.style.color = '#00C800';
+            } else if (batteryPercentage >= 80) {
+                color1.style.color = '#00C800';
+                color2.style.color = '#00C800';
+                color3.style.color = '#00C800';
+                color4.style.color = '#00C800';
+                color5.style.color = '#00C800';
+                color6.style.color = '#00C800';
+                color7.style.color = '#00C800';
+                color8.style.color = '#00C800';
+                color9.style.color = '#00C800';
+                color10.style.color = '#FFFFFF';
+            } else if (batteryPercentage >= 70) {
+                color1.style.color = '#00C800';
+                color2.style.color = '#00C800';
+                color3.style.color = '#00C800';
+                color4.style.color = '#00C800';
+                color5.style.color = '#00C800';
+                color6.style.color = '#00C800';
+                color7.style.color = '#00C800';
+                color8.style.color = '#00C800';
+                color9.style.color = '#FFFFFF';
+                color10.style.color = '#FFFFFF';
+            } else if (batteryPercentage >= 60) {
+                color1.style.color = '#00C800';
+                color2.style.color = '#00C800';
+                color3.style.color = '#00C800';
+                color4.style.color = '#00C800';
+                color5.style.color = '#00C800';
+                color6.style.color = '#00C800';
+                color7.style.color = '#00C800';
+                color8.style.color = '#FFFFFF';
+                color9.style.color = '#FFFFFF';
+                color10.style.color = '#FFFFFF';
+            } else if (batteryPercentage >= 50) {
+                color1.style.color = '#FFDC3C';
+                color2.style.color = '#FFDC3C';
+                color3.style.color = '#FFDC3C';
+                color4.style.color = '#FFDC3C';
+                color5.style.color = '#FFDC3C';
+                color6.style.color = '#FFDC3C';
+                color7.style.color = '#FFFFFF';
+                color8.style.color = '#FFFFFF';
+                color9.style.color = '#FFFFFF';
+                color10.style.color = '#FFFFFF';
+            } else if (batteryPercentage >= 40) {
+                color1.style.color = '#FFDC3C';
+                color2.style.color = '#FFDC3C';
+                color3.style.color = '#FFDC3C';
+                color4.style.color = '#FFDC3C';
+                color5.style.color = '#FFDC3C';
+                color6.style.color = '#FFFFFF';
+                color7.style.color = '#FFFFFF';
+                color8.style.color = '#FFFFFF';
+                color9.style.color = '#FFFFFF';
+                color10.style.color = '#FFFFFF';
+            } else if (batteryPercentage >= 30) {
+                color1.style.color = '#FFDC3C';
+                color2.style.color = '#FFDC3C';
+                color3.style.color = '#FFDC3C';
+                color4.style.color = '#FFDC3C';
+                color5.style.color = '#FFFFFF';
+                color6.style.color = '#FFFFFF';
+                color7.style.color = '#FFFFFF';
+                color8.style.color = '#FFFFFF';
+                color9.style.color = '#FFFFFF';
+                color10.style.color = '#FFFFFF';
+            } else if (batteryPercentage >= 20) {
+                color1.style.color = '#D20000';
+                color2.style.color = '#D20000';
+                color3.style.color = '#D20000';
+                color4.style.color = '#FFFFFF';
+                color5.style.color = '#FFFFFF';
+                color6.style.color = '#FFFFFF';
+                color7.style.color = '#FFFFFF';
+                color8.style.color = '#FFFFFF';
+                color9.style.color = '#FFFFFF';
+                color10.style.color = '#FFFFFF';
+            } else if (batteryPercentage >= 10) {
+                color1.style.color = '#D20000';
+                color2.style.color = '#D20000';
+                color3.style.color = '#FFFFFF';
+                color4.style.color = '#FFFFFF';
+                color5.style.color = '#FFFFFF';
+                color6.style.color = '#FFFFFF';
+                color7.style.color = '#FFFFFF';
+                color8.style.color = '#FFFFFF';
+                color9.style.color = '#FFFFFF';
+                color10.style.color = '#FFFFFF';
+            } else if (batteryPercentage >= 1) {
+                color1.style.color = '#D20000';
+                color2.style.color = '#FFFFFF';
+                color3.style.color = '#FFFFFF';
+                color4.style.color = '#FFFFFF';
+                color5.style.color = '#FFFFFF';
+                color6.style.color = '#FFFFFF';
+                color7.style.color = '#FFFFFF';
+                color8.style.color = '#FFFFFF';
+                color9.style.color = '#FFFFFF';
+                color10.style.color = '#FFFFFF';
+            } else {
+                color1.style.color = '#FFFFFF';
+                color2.style.color = '#FFFFFF';
+                color3.style.color = '#FFFFFF';
+                color4.style.color = '#FFFFFF';
+                color5.style.color = '#FFFFFF';
+                color6.style.color = '#FFFFFF';
+                color7.style.color = '#FFFFFF';
+                color8.style.color = '#FFFFFF';
+                color9.style.color = '#FFFFFF';
+                color10.style.color = '#FFFFFF';
+            }
         }
-
-
-        // function updateCountdown() {
-            // const batteryPercentage = data.stream.BAT;
-            // const countdown = document.getElementById('countdown');
-            // count--;
-
-            // countdown.textContent = batteryPercentage + '%';
-
-            // if (batteryPercentage === 0) {
-            //     clearInterval(countdown);
-            // }
-
-            // if (batteryPercentage >= 90) {
-            //     color1.style.color = '#00C800';
-            //     color2.style.color = '#00C800';
-            //     color3.style.color = '#00C800';
-            //     color4.style.color = '#00C800';
-            //     color5.style.color = '#00C800';
-            //     color6.style.color = '#00C800';
-            //     color7.style.color = '#00C800';
-            //     color8.style.color = '#00C800';
-            //     color9.style.color = '#00C800';
-            //     color10.style.color = '#00C800';
-            // } else if (batteryPercentage >= 80) {
-            //     color1.style.color = '#00C800';
-            //     color2.style.color = '#00C800';
-            //     color3.style.color = '#00C800';
-            //     color4.style.color = '#00C800';
-            //     color5.style.color = '#00C800';
-            //     color6.style.color = '#00C800';
-            //     color7.style.color = '#00C800';
-            //     color8.style.color = '#00C800';
-            //     color9.style.color = '#00C800';
-            //     color10.style.color = '#FFFFFF';
-            // } else if (batteryPercentage >= 70) {
-            //     color1.style.color = '#00C800';
-            //     color2.style.color = '#00C800';
-            //     color3.style.color = '#00C800';
-            //     color4.style.color = '#00C800';
-            //     color5.style.color = '#00C800';
-            //     color6.style.color = '#00C800';
-            //     color7.style.color = '#00C800';
-            //     color8.style.color = '#00C800';
-            //     color9.style.color = '#FFFFFF';
-            // } else if (batteryPercentage >= 60) {
-            //     color1.style.color = '#00C800';
-            //     color2.style.color = '#00C800';
-            //     color3.style.color = '#00C800';
-            //     color4.style.color = '#00C800';
-            //     color5.style.color = '#00C800';
-            //     color6.style.color = '#00C800';
-            //     color7.style.color = '#00C800';
-            //     color8.style.color = '#FFFFFF';
-            // } else if (batteryPercentage >= 50) {
-            //     color1.style.color = '#FFDC3C';
-            //     color2.style.color = '#FFDC3C';
-            //     color3.style.color = '#FFDC3C';
-            //     color4.style.color = '#FFDC3C';
-            //     color5.style.color = '#FFDC3C';
-            //     color6.style.color = '#FFDC3C';
-            //     color7.style.color = '#FFFFFF';
-            // } else if (batteryPercentage >= 40) {
-            //     color1.style.color = '#FFDC3C';
-            //     color2.style.color = '#FFDC3C';
-            //     color3.style.color = '#FFDC3C';
-            //     color4.style.color = '#FFDC3C';
-            //     color5.style.color = '#FFDC3C';
-            //     color6.style.color = '#FFFFFF';
-            // } else if (batteryPercentage >= 30) {
-            //     color1.style.color = '#FFDC3C';
-            //     color2.style.color = '#FFDC3C';
-            //     color3.style.color = '#FFDC3C';
-            //     color4.style.color = '#FFDC3C';
-            //     color5.style.color = '#FFFFFF';
-            // } else if (batteryPercentage >= 20) {
-            //     color1.style.color = '#D20000';
-            //     color2.style.color = '#D20000';
-            //     color3.style.color = '#D20000';
-            //     color4.style.color = '#FFFFFF';
-            // } else if (batteryPercentage >= 10) {
-            //     color1.style.color = '#D20000';
-            //     color2.style.color = '#D20000';
-            //     color3.style.color = '#FFFFFF';
-            // } else if (batteryPercentage >= 1) {
-            //     color1.style.color = '#D20000';
-            //     color2.style.color = '#FFFFFF';
-            // } else {
-            //     color1.style.color = '#FFFFFF';
-            //     color2.style.color = '#FFFFFF';
-            //     color3.style.color = '#FFFFFF';
-            //     color4.style.color = '#FFFFFF';
-            //     color5.style.color = '#FFFFFF';
-            //     color6.style.color = '#FFFFFF';
-            //     color7.style.color = '#FFFFFF';
-            //     color8.style.color = '#FFFFFF';
-            //     color9.style.color = '#FFFFFF';
-            //     color10.style.color = '#FFFFFF';
-            // }
-        // }
         
     </script>
 
