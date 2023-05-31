@@ -344,7 +344,8 @@
         #wheelElement {
             height: auto;
             width: 45vw;
-            margin: 9.75vh 0 0 0;
+            /* margin: 9.75vh 0 0 0; */
+            margin: 5.5vh 0 0 0;
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -404,11 +405,15 @@
             height: 18.75vh;
             width: 9.1vw;
             margin: 0 0 0 4vw;
-            fill: #404040; /*///-- Cor Luzes --\\\*/
+            fill: currentColor;
         }
 
         .button-lights-svg:active{
             opacity: 60%;
+        }
+
+        #lightBtn{
+            color: #404040; /*///-- Cor Luzes --\\\*/
         }
 
         /* Bottom Right */
@@ -449,6 +454,25 @@
 
         .button-accelerator-svg:active{
             opacity: 60%;
+        }
+
+        #trimShow{
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            top: -25px;
+            left: -25px;
+        }
+
+        .blue{
+            background-color: blue;
+            color: white;
+        }
+
+        .red{
+            background-color: red;
+            color: white;
         }
 
         /* All Cars Code */
@@ -524,7 +548,7 @@
           </div>
         <div class="button-container">
     <!-- BUTTON "Def" --->
-            <button class="button-def" id="defBtn">
+            <button class="button-def" id="defBtn" onclick="showTrims()">
                 <img class="button-def-color" alt="Config" src="data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZmlsbDogI0ZGRkZGRjsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDIwNi44MyAyMDYuODMiPjxnPjxwYXRoIGQ9Im0xMDMuMDEsNzMuMDRjLTE3LjMuMjctMjkuODYsMTQuNDEtMzAuMDUsMjkuNzctLjI0LDE4LjgxLDE1LjY0LDMxLjQ1LDMxLjI4LDMwLjkzLDE2LjY2LS41NSwyOS44NS0xNC40MSwyOS41LTMxLjM5LS4zMy0xNi4xNy0xNC40Ny0yOS42Ni0zMC43My0yOS4zMVoiLz48cGF0aCBkPSJtMTY2Ljc1LDBINDAuMDdDMTcuOTQsMCwwLDE3Ljk0LDAsNDAuMDd2MTI2LjY4YzAsMjIuMTMsMTcuOTQsNDAuMDcsNDAuMDcsNDAuMDdoMTI2LjY4YzIyLjEzLDAsNDAuMDctMTcuOTQsNDAuMDctNDAuMDdWNDAuMDdjMC0yMi4xMy0xNy45NC00MC4wNy00MC4wNy00MC4wN1ptNS40LDEwOS4zOWMtLjEsMy45Ny0yLjMyLDYuNTItNi4yMyw3LjI3LTIuNDYuNDgtNC45Ny42OS03LjQsMS4yOC0uODMuMi0xLjgsMS4wMi0yLjE2LDEuOC0xLjQ3LDMuMTYtMi43OSw2LjM5LTQsOS42Ni0uMjguNzQtLjE4LDEuOTEuMjMsMi41NywxLjMzLDIuMTIsMi45Miw0LjA3LDQuMzUsNi4xMywyLjMsMy4zNCwyLjAzLDYuODQtLjgsOS43Ni0yLjc0LDIuODMtNS41NCw1LjYxLTguMzYsOC4zNi0yLjc0LDIuNjctNi4zMywyLjk5LTkuNTUuODItMi4wOC0xLjQtNC0zLjAzLTYuMTMtNC4zNC0uNzMtLjQ1LTEuOTktLjU3LTIuOC0uMjctMy4xOSwxLjE2LTYuMzQsMi40NS05LjQxLDMuOS0uODYuNC0xLjc2LDEuMzktMiwyLjI4LS41OSwyLjI0LS43Nyw0LjU4LTEuMTcsNi44Ny0uNzYsNC4zOS0zLjI4LDYuNjEtNy43MSw2LjctMy43Ni4wNy03LjUzLjA3LTExLjI5LDAtNC40NC0uMDgtNy4zNS0yLjMtNy41OS02LjctLjMzLTYuMDItMi40Mi05LjQ4LTguNy0xMS41Ni00LjUtMS41LTcuNTEtMS44My0xMC43OCwxLjQ5LS43NC43NS0xLjcxLDEuMzEtMi42MiwxLjg3LTIuOTgsMS44NC02LjM1LDEuNTUtOC44OC0uODgtMi45MS0yLjc5LTUuNzUtNS42NS04LjU2LTguNTQtMi44Ny0yLjk1LTMuMTItNi4zMy0uNzgtOS43MywxLjY3LTIuNDMsNC40OC00LjY3LDQuODItNy4yNS4zMi0yLjQyLTIuMzgtNS4wOS0yLjk3LTcuODItLjkxLTQuMTktMy4xNy02LTcuMzMtNS44OS0xLjE0LjAzLTIuMzEtLjI4LTMuNDUtLjUxLTQuMDgtLjgyLTYuMjEtMy4zNS02LjI5LTcuNDgtLjA0LTEuOTcsMC0zLjk0LDAtNS45MSwwLTEuOTctLjAzLTMuOTQsMC01LjkuMDctMy42NSwyLjE3LTYuMzIsNS43My03LjA5LDMuMTMtLjY4LDcuMDMtLjI2LDkuMjQtMi4wMiwyLjEyLTEuNjgsMi4xNy01Ljc0LDMuNzQtOC40LDEuNzItMi45MSwxLjMyLTQuOS0uNjktNy41MS02LjI2LTguMTUtNi4wNS05LjQ0LDEuMTQtMTYuNjMsMS43MS0xLjcxLDMuMzgtMy40Niw1LjEzLTUuMTMsMi45Ni0yLjgsNi4xOC0zLjEzLDkuNTEtLjksMi41MywxLjY5LDQuODMsNC42MSw3LjQ5LDQuOTYsMi41MS4zMiw1LjI1LTIuNSw4LjA3LTMuMDgsNC4xMi0uODUsNS41Mi0zLjIsNS41NS03LjAyLjAxLTEuMjQuMzQtMi40OC41Ny0zLjcxLjc1LTMuOTQsMy4yNy02LjE1LDcuMjMtNi4yMSw0LjAzLS4wNyw4LjA2LS4wNywxMi4wOSwwLDMuODYuMDcsNi4zOSwyLjE4LDcuMTgsNS45Ny41MywyLjU0Ljc0LDUuMTUsMS4zNSw3LjY3LjIuODIsMS4wNiwxLjc1LDEuODUsMi4xMiwzLjA4LDEuNDMsNi4yMiwyLjc0LDkuNCwzLjkxLjgyLjMsMi4wOC4yNiwyLjgtLjE3LDIuMTQtMS4yOSw0LjA4LTIuOTEsNi4xNi00LjMxLDMuNDYtMi4zMyw2Ljc3LTIuMDYsOS43My44MiwyLjgzLDIuNzUsNS42Myw1LjUyLDguMzcsOC4zNSwyLjY3LDIuNzYsMi45NCw2LjM0Ljc0LDkuNTYtMS40MSwyLjA3LTMuMDMsNC4wMS00LjMzLDYuMTUtLjQ0LjczLS41MywxLjk5LS4yNCwyLjgsMS4xNiwzLjE5LDIuNDQsNi4zNCwzLjg5LDkuNDEuNDEuODYsMS40NSwxLjcyLDIuMzcsMS45NywyLjI0LjU5LDQuNTguNzksNi44NywxLjE5LDQuMjYuNzUsNi41MSwzLjI2LDYuNiw3LjUxLjA4LDMuOTQuMDksNy44OC0uMDEsMTEuODJaIi8+PC9nPjwvc3ZnPgo=" />
             </button>
     <!-- BUTTON "START" --->
@@ -533,7 +557,7 @@
             </button>
         </div>
     </header>
-    <main id="chageToLight">
+    <main id="changeToLight">
         <div class="controllers-left">
     <!-- STEERWHEEL --->
             <div class="steer-container">
@@ -545,6 +569,15 @@
 
         <div class="controllers-right">
             <div class="top-container">
+    <!-- TRIM --->
+        <div id="trimShow" class="trm">
+            <div class="blue" id="trimLeft" onclick="tright()">
+                <---Left&nbsp;&nbsp;
+            </div>
+            <div class="red" id="trimRight" onclick="tleft()">
+                &nbsp;Right-->
+            </div>
+        </div>
     <!-- LIGHTS --->
                 <button class="button-lights">
                     <svg id="lightBtn" class="button-lights-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 206.83 206.83"><g><g><path d="m121.83,128.34h-38.04c0,.09.01.18,0,.28-.06.56-.08,1.08-.08,1.57v15.03h38.2v-15.03c0-.5-.03-1.01-.08-1.57,0-.09,0-.18,0-.28Z"/><path d="m91.83,51.27c-21.01,9.28-26.83,36.8-18.97,56.29,2.31,5.68,5.79,10.94,10.38,15.16.14.13.26.27.38.41h37.59c.09-.14.17-.27.28-.41,10.9-14.62,14.64-33.29,9.1-50.33-5.35-15.63-21.48-28.4-38.77-21.12Z"/><path d="m83.71,150.84c0,8.99,7.6,16.3,16.94,16.3h4.33c9.34,0,16.94-7.31,16.94-16.3v-.41h-38.2v.41Z"/><path d="m166.75,0H40.07C17.94,0,0,17.94,0,40.07v126.68c0,22.13,17.94,40.07,40.07,40.07h126.68c22.13,0,40.07-17.94,40.07-40.07V40.07c0-22.13-17.94-40.07-40.07-40.07Zm-39.51,128.43c.05.61.08,1.2.08,1.76v20.65c0,11.86-10.03,21.52-22.35,21.52h-4.33c-12.32,0-22.35-9.65-22.35-21.52v-20.65c0-.41.02-.84.05-1.28-.09-.06-.19-.1-.28-.16-16.78-12.17-23.32-34.17-19.59-53.59,4.6-27.47,31.94-49.41,60.75-37.17,18.04,7.72,28.24,26.22,29.9,44.48,1.69,17.42-5.55,37-21.88,45.96Z"/></g></g></svg>
@@ -587,7 +620,26 @@
         }
 
         const uiSettingsTopBar = {
-        showTopBar: true,
+        showTopBar: false,
+        }
+
+        //////////////////
+
+        const showTrim = document.getElementById('trimShow');
+        let count = 0;
+
+        function showTrims() {
+        count++;
+
+            switch (count) {
+                case 1:
+                showTrim.style.display = 'flex';
+                break;
+                default:
+                showTrim.style.display = 'none';
+                count = 0;
+                break;
+            }
         }
 
         const defbtn = document.getElementById('defBtn');
@@ -595,6 +647,7 @@
         function ChangeShowTopBar() {
         uiSettingsTopBar.showTopBar = !uiSettingsTopBar.showTopBar;
         console.log(uiSettingsTopBar)
+        BleFunctions.loadUISettings(JSON.stringify(uiSettingsTopBar))
         }
 
         defbtn.addEventListener('click', ChangeShowTopBar);
@@ -1068,30 +1121,83 @@
 
         /////////////////////////// LIGHTS ///////////////////////////
 
+        //LIGHTS
+
+        //GREEN = 49152
+        //RED = 255
+        //BLUE = 16776960
+        //WHITE = 16769056
+        //YELLOW = 
+        //PURPLE = 16724889
+      
         const lgtbtn = document.getElementById('lightBtn');
-        const changeLight = document.getElementById('chageToLight');
+        // const changeLight = document.getElementById('changeToLight');
         let counter = 0;
 
-        lgtbtn.addEventListener('click', changeBackgroundColor);
+        lgtbtn.addEventListener('click', changeColor);
 
-        function changeBackgroundColor() {
-        counter++;
+        function changeColor() {
+            counter++;
 
-        switch (counter) {
-            case 1:
-            changeLight.style.backgroundColor = '#7685F7';
-            break;
-            case 2:
-            changeLight.style.backgroundColor = '#43DE8B';
-            break;
-            case 3:
-            changeLight.style.backgroundColor = '#F7875B';
-            break;
-            default:
-            changeLight.style.backgroundColor = '#FFFFFF';
-            counter = 0;
-            break;
+            switch (counter) {
+                default:
+                cls.send('{"stream":{"LEDS":0,"val":[0, 0, 0, 0]}}');
+                lgtbtn.style.color = '#404040';
+                counter = 0;
+                break;
+
+                case 1:
+                cls.send('{"stream":{"LEDS":0,"val":[49152, 49152, 49152, 49152]}}');
+                lgtbtn.style.color = '#7685F7';
+                break;
+
+                case 2:
+                cls.send('{"stream":{"TIM":0,"val":[1000,-1],"event":{"stream":{"LEDS":0,"val":[255, 255, 16776960, 16776960]}}}}');
+                cls.send('{"stream":{"TIM":1,"val":[500,-1],"event":{"stream":{"TIM":1,"val":[1000,-1],"event":{"stream":{"LEDS":0,"val":[16776960, 16776960, 255, 255]}}}}}}');
+                lgtbtn.style.color = '#e51919';
+                break;
+
+                case 3:
+                cls.send('{"stream":{"TIM":0,"val":[500,-1],"event":{"stream":{"LEDS":0,"val":[255, 255, 255, 255]}}}}');
+                cls.send('{"stream":{"TIM":1,"val":[250,-1],"event":{"stream":{"TIM":1,"val":[500,-1],"event":{"stream":{"LEDS":0,"val":[16776960, 16776960, 16776960, 16776960]}}}}}}');
+                lgtbtn.style.color = '#43DE8B';
+                break;
+
+                case 4:
+                cls.send('{"stream":{"TIM":0,"val":[0,0],"event":{}}}');
+                cls.send('{"stream":{"TIM":1,"val":[0,0],"event":{}}}');
+                cls.send('{"stream":{"LEDS":0,"val":[16777011, 49152, 15790080, 255]}}');
+                lgtbtn.style.color = '#F7875B';
+                break;
+            }
         }
+
+        /////////////////////////// TRIM ///////////////////////////
+
+
+        //TRIM
+        var trim = 73;
+        function tright(){
+        if(trim < 83){
+        trim++;
+        cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
+        }
+        } 
+        function tleft(){
+        if(trim > 63){
+        trim--;
+        cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
+        }
+        } 
+        // ----- / ----- LEFT // RIGHT ---- / ------
+        function left(){
+        cls.send('{"stream":{"PWM":12,"val":46}}');
+        }
+        function right(){
+        cls.send('{"stream":{"PWM":12,"val":106}}');
+        }
+        function center(){
+        cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
         }
 
         
