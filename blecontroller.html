@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="icon" href="img/steeringwheel_3.svg" type="image/icon">
+    <title>Ble Controller (Miguel Andrade version)</title>
+
+    <!-- ---- / -- / ---- CSS ---- / -- / ---- -->
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+        }
+
+        body{
+
+            -webkit-user-select: none;
+
+            -khtml-user-select: none;
+
+            -moz-user-select: none;
+
+            -ms-user-select: none;
+
+            user-select: none;
+        }
+
+        button{
+            all: unset;
+        }
+
+        /* ---- / ---- HEADER ---- / ---- */
+        header{
+            width: 100%;
+            height: 25vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #404040; /*///-- Cor Barra Superior --\\\*/
+        }
+
+        .battery-container{
+            width: calc(100% / 3);
+            height: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin: 0 3vw 0 0;
+        }
+
+        .battery{
+            height: 12.5vh;
+            fill: #FFFFFF;
+        }
+
+        #batteryColor1{
+            fill: currentColor;
+            color: #FFFFFF;
+        }
+
+        #batteryColor2{
+            fill: currentColor;
+            color: #FFFFFF;
+        }
+
+        #batteryColor3{
+            fill: currentColor;
+            color: #FFFFFF;
+        }
+
+        #batteryColor4{
+            fill: currentColor;
+            color: #FFFFFF;
+        }
+
+        #batteryColor5{
+            fill: currentColor;
+            color: #FFFFFF;
+        }
+
+        #batteryColor6{
+            fill: currentColor;
+            color: #FFFFFF;
+        }
+
+        #batteryColor7{
+            fill: currentColor;
+            color: #FFFFFF;
+        }
+
+        #batteryColor8{
+            fill: currentColor;
+            color: #FFFFFF;
+        }
+
+        #batteryColor9{
+            fill: currentColor;
+            color: #FFFFFF;
+        }
+
+        #batteryColor10{
+            fill: currentColor;
+            color: #FFFFFF;
+        }
+
+        /* .battery-percentage{
+            height: 12.5vh;
+            width: 9vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .battery-percentage{
+            font-family: 'Inter', sans-serif;
+            margin: 0 6.25vw 0 1vw;
+            color: #FFFFFF;
+            font-size: 6.25vh;
+            font-weight: bold;
+            user-select: none;
+        } */
+
+        .rpm{
+            height: 6.25vh;
+            width: calc(100% / 3);
+        }
+
+        #rpmColor_1{
+            background-color: #FFFFFF;
+        }
+
+        #rpmColor_2{
+            background-color: #FFFFFF;
+        }
+
+        #rpmColor_3{
+            background-color: #ffffff;
+        }
+
+        #rpmColor_4{
+            background-color: #FFFFFF;
+        }
+
+        #rpmColor_5{
+            background-color: #FFFFFF;
+        }
+
+        #rpmColor_6{
+            background-color: #FFFFFF;
+        }
+
+        #rpmColor_7{
+            background-color: #FFFFFF;
+        }
+
+        #rpmColor_8{
+            background-color: #FFFFFF;
+        }
+
+        #rpmColor_9{
+            background-color: #FFFFFF;
+        }
+
+        #rpmColor_10{
+            background-color: #FFFFFF;
+        }
+
+        .rpm-name {
+            font-family: 'Inter', sans-serif;
+            margin: -1vh 1vw;
+            color: #FFFFFF;
+            font-size: 6.25vh;
+            user-select: none;
+        }
+
+        .container_2{
+            width: 35%;
+            height: 4.5vh;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+
+        .rpm1 {
+            width: 4.5vh;
+            height: calc(4.5vh - 90%);
+            margin: 0 0.3vh;
+            background-color: #FFFFFF;
+        }
+
+        .rpm2 {
+            width: 4.5vh;
+            height: calc(4.5vh - 80%);
+            margin: 0 0.3vh;
+            background-color: #FFFFFF;
+        }
+
+        .rpm3 {
+            width: 4.5vh;
+            height: calc(4.5vh - 70%);
+            margin: 0 0.3vh;
+            background-color: #FFFFFF;
+        }
+
+        .rpm4 {
+            width: 4.5vh;
+            height: calc(4.5vh - 60%);
+            margin: 0 0.3vh;
+            background-color: #FFFFFF;
+        }
+
+        .rpm5 {
+            width: 4.5vh;
+            height: calc(4.5vh - 50%);
+            margin: 0 0.3vh;
+            background-color: #FFFFFF;
+        }
+
+        .rpm6 {
+            width: 4.5vh;
+            height: calc(4.5vh - 40%);
+            margin: 0 0.3vh;
+            background-color: #FFFFFF;
+        }
+
+        .rpm7 {
+            width: 4.5vh;
+            height: calc(4.5vh - 30%);
+            margin: 0 0.3vh;
+            background-color: #FFFFFF;
+        }
+
+        .rpm8 {
+            width: 4.5vh;
+            height: calc(4.5vh - 20%);
+            margin: 0 0.3vh;
+            background-color: #FFFFFF;
+        }
+
+        .rpm9 {
+            width: 4.5vh;
+            height: calc(4.5vh - 10%);
+            margin: 0 0.3vh;
+            background-color: #FFFFFF;
+        }
+
+        .rpm10 {
+            width: 4.5vh;
+            height: 4.5vh;
+            margin: 0 0.3vh;
+            background-color: #FFFFFF;
+        }
+
+        .button-container{
+            width: calc(100% / 3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button-con{
+            height: auto;
+            width: 12vh;
+        }
+
+        /* .button-con-color{
+            color: #D20000;
+        } */
+
+        .button-con-color:active{
+            opacity: 60%;
+        }
+
+        .button-def{
+            width: 12vw;
+        }
+
+        .button-def-color{
+            height: 12vh;
+            fill: #FFFFFF;
+        }
+
+        .button-def-color:active{
+            opacity: 60%;
+        }
+
+        #conbut{
+            height: 18.75vh;
+            fill: currentColor;
+            color: #D20000;
+        }
+
+        .button-color_2{
+            fill: #FFFFFF;
+        }
+
+        /* ---- / ---- MAIN ---- / ---- */
+        main{
+            height: 75vh;
+            display: flex;
+            background-color: #FFFFFF; /*///-- Cor de Fundo --\\\*/
+            overflow: hidden;
+        }
+
+        /* ---- LEFT SIDE ---- */
+        .controllers-left{
+            width: 50%;
+            display: flex;
+            align-items: top;
+            padding: 0 3.125vw 0 0;
+        }
+
+        .attachment-container{
+            height: 12.5vh;
+            width: 12.5vw;
+            margin: 6.25vh 0 0 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .button-attachment{
+            height: 12.5vh;
+            width: 6.25vw;
+            fill: #404040; /*///-- Cor Botão Bomba --\\\*/
+        }
+
+        .button-attachment:active{
+            opacity: 60%;
+        }
+
+        .steer-container{
+            height: 100%;
+            padding: 0 8vw 0 8vw;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow: hidden;
+        }
+
+        #wheelElement {
+            height: auto;
+            width: 45vw;
+            /* margin: 9.75vh 0 0 0; */
+            margin: 5.5vh 0 0 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            content: "";
+            z-index: 1;
+            transform: rotate(var(--rotate-deg));
+            -webkit-transform: rotate(var(--rotate-deg));
+        }
+
+        .steeringwheel{
+            height: auto;
+            width: 100%;
+            fill: #000000; /*///-- Cor Volante --\\\*/
+        }
+
+        .buzzer-container{
+            height: 12.5vh;
+            width: 12.5vw;
+            margin: 6.25vh 0 0 0;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .button-buzzer{
+            height: 12.5vh;
+            width: 6.25vw;
+            fill: #404040; /*///-- Cor Buzina --\\\*/
+        }
+
+        .button-buzzer:active{
+            opacity: 60%;
+        }
+
+        /* ---- RIGHT SIDE ---- */
+        .controllers-right{
+            width: 50%;
+        }
+
+        /* Top Right */
+
+        .top-container{
+            height: 25vh;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+
+        .button-lights{
+            height: 18.75vh;
+            width: 18.75vw;
+            margin: 0 9.375vw 0 0;
+        }
+
+        .button-lights-svg{
+            height: 18.75vh;
+            width: 9.1vw;
+            margin: 0 0 0 4vw;
+            fill: currentColor;
+        }
+
+        .button-lights-svg:active{
+            opacity: 60%;
+        }
+
+        #lightBtn{
+            color: #404040; /*///-- Cor Luzes --\\\*/
+        }
+
+        /* Bottom Right */
+
+        .bottom-container{
+            height: 50vh;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .button-brake{
+            width: 25vh;
+            height: 25vw;
+            margin: 12.5vh 0 0 0;
+        }
+
+        .button-brake-svg{
+            height: 25vh;
+            width: 12.5vw;
+        } 
+
+        .button-brake-svg:active{
+            opacity: 60%;
+        }
+
+        .button-accelerator{
+            height: 37.5vh;
+            width: 12.5vw;
+            margin: 0 6.25vw 0 3.125vw;
+        }
+
+        .button-accelerator-svg{
+            height: 37.5vh;
+            width: 12.5vw;
+        }
+
+        .button-accelerator-svg:active{
+            opacity: 60%;
+        }
+
+        #trimShow{
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            top: -25px;
+            left: -25px;
+        }
+
+        .blue{
+            background-color: blue;
+            color: white;
+        }
+
+        .red{
+            background-color: red;
+            color: white;
+        }
+
+        /* All Cars Code */
+
+        .ok{
+            float:right;
+            width:40%;
+            color:green;
+            font-size:20px;
+        }
+        .no{
+            float:left;
+            width:40%;
+            color:red;
+            font-size:20px;
+        }
+        select{padding:10px;}
+        /* .modl{
+            display:none;
+            position: fixed;
+            z-index:1;
+            padding-top:10px;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            overflow:auto;
+            background-color:rgb(0,0,0);
+            background-color:rgba(0,0,0,0.75);
+        } */
+        /* .dlg{
+            position: fixed;
+            width:90%;
+            left:50%;
+            top:50%;
+            max-width:640px;
+            transform:translate(-50%,-50%);
+            margin:auto;
+            padding:10px;
+            border:2px solid #A0A0A0;
+            border-radius:8px;
+            background-color:#707070;
+            text-align: center;
+        } */
+
+        #battery-percentage{
+            font-size: 6.25vh;
+            font-weight: 600;
+            padding-left: 15vw;
+            /* padding-top: 4.5vh; */
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            user-select: none;
+            margin: 0 5vh 0 0;
+        }
+
+        .battery-outer {
+            background: transparent;
+            width: 15vw;
+            height: 10vh;
+            border: 3.5px solid #FFFF;
+            border-radius: 5px;
+            position: absolute;
+            margin: 0 20vh 0 0;
+        }
+
+        .battery-outer:after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 25%);
+            right: -0.70vw;
+            width: 0.5vw;
+            height: 3vh;
+            background: #FFFF;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+    
+        .battery-level {
+            width: 100%;
+            border-radius: 2px;
+            height: 100%;
+        }
+
+    </style>
+
+</head>
+
+    <!-- ---- / -- / ---- HTML ---- / -- / ---- -->
+<body> <!-- onblur='blur()' --->
+    <header>
+    <!-- BATERY --->
+        <div class="battery-container">
+            <div class="battery-outer" onclick='location.reload();'>
+				<div id='batlvl' class="battery-level"></div>
+			</div>
+			<p id="battery-percentage">-x-</p>
+        </div>
+    <!-- RPM --->
+        <div class="container_2">
+            <div class="rpm1" id="rpmColor_1"></div>
+            <div class="rpm2" id="rpmColor_2"></div>
+            <div class="rpm3" id="rpmColor_3"></div>
+            <div class="rpm4" id="rpmColor_4"></div>
+            <div class="rpm5" id="rpmColor_5"></div>
+            <div class="rpm6" id="rpmColor_6"></div>
+            <div class="rpm7" id="rpmColor_7"></div>
+            <div class="rpm8" id="rpmColor_8"></div>
+            <div class="rpm9" id="rpmColor_9"></div>
+            <div class="rpm10" id="rpmColor_10"></div>
+            <p class="rpm-name"><b>RPM</b></p> 
+          </div>
+        <div class="button-container">
+    <!-- BUTTON "Def" --->
+            <button class="button-def" id="defBtn" onclick="showTrims()">
+                <img class="button-def-color" alt="Config" src="data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZmlsbDogI0ZGRkZGRjsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDIwNi44MyAyMDYuODMiPjxnPjxwYXRoIGQ9Im0xMDMuMDEsNzMuMDRjLTE3LjMuMjctMjkuODYsMTQuNDEtMzAuMDUsMjkuNzctLjI0LDE4LjgxLDE1LjY0LDMxLjQ1LDMxLjI4LDMwLjkzLDE2LjY2LS41NSwyOS44NS0xNC40MSwyOS41LTMxLjM5LS4zMy0xNi4xNy0xNC40Ny0yOS42Ni0zMC43My0yOS4zMVoiLz48cGF0aCBkPSJtMTY2Ljc1LDBINDAuMDdDMTcuOTQsMCwwLDE3Ljk0LDAsNDAuMDd2MTI2LjY4YzAsMjIuMTMsMTcuOTQsNDAuMDcsNDAuMDcsNDAuMDdoMTI2LjY4YzIyLjEzLDAsNDAuMDctMTcuOTQsNDAuMDctNDAuMDdWNDAuMDdjMC0yMi4xMy0xNy45NC00MC4wNy00MC4wNy00MC4wN1ptNS40LDEwOS4zOWMtLjEsMy45Ny0yLjMyLDYuNTItNi4yMyw3LjI3LTIuNDYuNDgtNC45Ny42OS03LjQsMS4yOC0uODMuMi0xLjgsMS4wMi0yLjE2LDEuOC0xLjQ3LDMuMTYtMi43OSw2LjM5LTQsOS42Ni0uMjguNzQtLjE4LDEuOTEuMjMsMi41NywxLjMzLDIuMTIsMi45Miw0LjA3LDQuMzUsNi4xMywyLjMsMy4zNCwyLjAzLDYuODQtLjgsOS43Ni0yLjc0LDIuODMtNS41NCw1LjYxLTguMzYsOC4zNi0yLjc0LDIuNjctNi4zMywyLjk5LTkuNTUuODItMi4wOC0xLjQtNC0zLjAzLTYuMTMtNC4zNC0uNzMtLjQ1LTEuOTktLjU3LTIuOC0uMjctMy4xOSwxLjE2LTYuMzQsMi40NS05LjQxLDMuOS0uODYuNC0xLjc2LDEuMzktMiwyLjI4LS41OSwyLjI0LS43Nyw0LjU4LTEuMTcsNi44Ny0uNzYsNC4zOS0zLjI4LDYuNjEtNy43MSw2LjctMy43Ni4wNy03LjUzLjA3LTExLjI5LDAtNC40NC0uMDgtNy4zNS0yLjMtNy41OS02LjctLjMzLTYuMDItMi40Mi05LjQ4LTguNy0xMS41Ni00LjUtMS41LTcuNTEtMS44My0xMC43OCwxLjQ5LS43NC43NS0xLjcxLDEuMzEtMi42MiwxLjg3LTIuOTgsMS44NC02LjM1LDEuNTUtOC44OC0uODgtMi45MS0yLjc5LTUuNzUtNS42NS04LjU2LTguNTQtMi44Ny0yLjk1LTMuMTItNi4zMy0uNzgtOS43MywxLjY3LTIuNDMsNC40OC00LjY3LDQuODItNy4yNS4zMi0yLjQyLTIuMzgtNS4wOS0yLjk3LTcuODItLjkxLTQuMTktMy4xNy02LTcuMzMtNS44OS0xLjE0LjAzLTIuMzEtLjI4LTMuNDUtLjUxLTQuMDgtLjgyLTYuMjEtMy4zNS02LjI5LTcuNDgtLjA0LTEuOTcsMC0zLjk0LDAtNS45MSwwLTEuOTctLjAzLTMuOTQsMC01LjkuMDctMy42NSwyLjE3LTYuMzIsNS43My03LjA5LDMuMTMtLjY4LDcuMDMtLjI2LDkuMjQtMi4wMiwyLjEyLTEuNjgsMi4xNy01Ljc0LDMuNzQtOC40LDEuNzItMi45MSwxLjMyLTQuOS0uNjktNy41MS02LjI2LTguMTUtNi4wNS05LjQ0LDEuMTQtMTYuNjMsMS43MS0xLjcxLDMuMzgtMy40Niw1LjEzLTUuMTMsMi45Ni0yLjgsNi4xOC0zLjEzLDkuNTEtLjksMi41MywxLjY5LDQuODMsNC42MSw3LjQ5LDQuOTYsMi41MS4zMiw1LjI1LTIuNSw4LjA3LTMuMDgsNC4xMi0uODUsNS41Mi0zLjIsNS41NS03LjAyLjAxLTEuMjQuMzQtMi40OC41Ny0zLjcxLjc1LTMuOTQsMy4yNy02LjE1LDcuMjMtNi4yMSw0LjAzLS4wNyw4LjA2LS4wNywxMi4wOSwwLDMuODYuMDcsNi4zOSwyLjE4LDcuMTgsNS45Ny41MywyLjU0Ljc0LDUuMTUsMS4zNSw3LjY3LjIuODIsMS4wNiwxLjc1LDEuODUsMi4xMiwzLjA4LDEuNDMsNi4yMiwyLjc0LDkuNCwzLjkxLjgyLjMsMi4wOC4yNiwyLjgtLjE3LDIuMTQtMS4yOSw0LjA4LTIuOTEsNi4xNi00LjMxLDMuNDYtMi4zMyw2Ljc3LTIuMDYsOS43My44MiwyLjgzLDIuNzUsNS42Myw1LjUyLDguMzcsOC4zNSwyLjY3LDIuNzYsMi45NCw2LjM0Ljc0LDkuNTYtMS40MSwyLjA3LTMuMDMsNC4wMS00LjMzLDYuMTUtLjQ0LjczLS41MywxLjk5LS4yNCwyLjgsMS4xNiwzLjE5LDIuNDQsNi4zNCwzLjg5LDkuNDEuNDEuODYsMS40NSwxLjcyLDIuMzcsMS45NywyLjI0LjU5LDQuNTguNzksNi44NywxLjE5LDQuMjYuNzUsNi41MSwzLjI2LDYuNiw3LjUxLjA4LDMuOTQuMDksNy44OC0uMDEsMTEuODJaIi8+PC9nPjwvc3ZnPgo=" />
+            </button>
+    <!-- BUTTON "START" --->
+            <button class="button-con" id='conbut'>
+                <svg onclick="connection();" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 206.83 206.83"><g><g><rect width="206.83" height="206.83" rx="40.07" ry="40.07"/><g><path class="button-color_2" d="m103.37,34.6c-3.32,0-6.01,2.69-6.01,6.01v55.13c0,3.32,2.69,6.01,6.01,6.01s6.01-2.69,6.01-6.01v-55.13c0-3.32-2.69-6.01-6.01-6.01Z"/><path class="button-color_2" d="m121.39,52.63v12.72c18.22,7.19,31.15,24.98,31.15,45.72,0,27.09-22.04,49.13-49.13,49.13s-49.13-22.04-49.13-49.13c0-20.72,12.89-38.48,31.07-45.69v-12.73c-24.93,7.72-43.08,30.99-43.08,58.42,0,33.72,27.43,61.15,61.14,61.15s61.14-27.43,61.14-61.15c0-27.46-18.2-50.75-43.16-58.45Z"/></g></g></g></svg>
+            </button>
+        </div>
+    </header>
+    <main id="changeToLight">
+        <div class="controllers-left">
+    <!-- STEERWHEEL --->
+            <div class="steer-container">
+                <div id="wheelElement" >
+                    <img class="steeringwheel" alt="Steeringwhell" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0ic3RlZXJpbmd3aGVlbCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTQ5LjY5IDU0OS42OSI+PGc+PGc+PHBhdGggZD0ibTQ2OS4xOSw4MC41QzQxNy4yOCwyOC41OSwzNDguMjYsMCwyNzQuODUsMFMxMzIuNDEsMjguNTksODAuNSw4MC41QzI4LjU5LDEzMi40MSwwLDIwMS40MywwLDI3NC44NXMyOC41OSwxNDIuNDMsODAuNSwxOTQuMzVjNTEuOTEsNTEuOTEsMTIwLjkzLDgwLjUsMTk0LjM1LDgwLjVzMTQyLjQ0LTI4LjU5LDE5NC4zNS04MC41YzUxLjkxLTUxLjkxLDgwLjUtMTIwLjkzLDgwLjUtMTk0LjM1cy0yOC41OS0xNDIuNDMtODAuNS0xOTQuMzVaTTc4LjMyLDE5Mi44N3MuMDMtLjA4LjA1LS4xMmMuMS0uMjUuMjEtLjQ5LjMyLS43NC40Ni0xLjEuOTQtMi4xOSwxLjQyLTMuMjguMTktLjQyLjM3LS44NC41Ni0xLjI2LjU0LTEuMjEsMS4xLTIuNDEsMS42Ni0zLjYxLjA5LS4yLjE4LS40LjI4LS42LjY2LTEuMzgsMS4zMy0yLjc1LDIuMDItNC4xMS4xOS0uMzguMzgtLjc1LjU4LTEuMTMuMTEtLjIyLjIyLS40NC4zNC0uNjYuNDItLjgyLjg1LTEuNjMsMS4yOC0yLjQ0LjIxLS4zOS40Mi0uNzkuNjMtMS4xOC43My0xLjM1LDEuNDctMi42OSwyLjIzLTQuMDIuMDMtLjA1LjA2LS4xLjA4LS4xNC43NC0xLjI5LDEuNDktMi41NywyLjI1LTMuODQuMjMtLjM5LjQ3LS43Ny43LTEuMTYuNjEtMSwxLjIzLTIsMS44NS0yLjk5LjIyLS4zNS40NC0uNy42Ni0xLjA1LjgzLTEuMjksMS42Ni0yLjU4LDIuNTItMy44NS4xNC0uMjEuMjktLjQyLjQzLS42NC43My0xLjA4LDEuNDctMi4xNSwyLjIxLTMuMjEuMjctLjM4LjU0LS43Ni44MS0xLjE0LjcxLTEsMS40My0xLjk4LDIuMTUtMi45Ny4yMS0uMjguNDItLjU3LjYzLS44NS45Mi0xLjI0LDEuODYtMi40NiwyLjgxLTMuNjguMjItLjI4LjQ1LS41Ny42Ny0uODUuNzYtLjk2LDEuNTItMS45MSwyLjI5LTIuODYuMy0uMzYuNTktLjczLjg5LTEuMDkuODUtMS4wMiwxLjcxLTIuMDQsMi41OC0zLjA1LjE2LS4xOC4zMS0uMzcuNDctLjU1LDEuMDItMS4xOCwyLjA1LTIuMzQsMy4xLTMuNS4yOS0uMzIuNTctLjYzLjg2LS45NC44MS0uODgsMS42Mi0xLjc2LDIuNDQtMi42My4zMS0uMzMuNjMtLjY2Ljk0LS45OSwxLjA5LTEuMTQsMi4xOS0yLjI3LDMuMzEtMy4zOSwxLjg2LTEuODYsMy43Ni0zLjY3LDUuNjgtNS40NSwyNy44NC0yNS45LDYxLjQ2LTQzLjU3LDk3Ljg4LTUxLjcyLDMuMzktLjc2LDYuNzktMS40MywxMC4yMy0yLjAzLDMuNDMtLjU5LDYuODgtMS4xLDEwLjM1LTEuNTMsMy40Ny0uNDMsNi45Ni0uNzcsMTAuNDctMS4wMywxLjc1LS4xMywzLjUxLS4yNCw1LjI3LS4zMiwzLjUyLS4xNyw3LjA2LS4yNiwxMC42Mi0uMjZoMGM1LjQ3LDAsMTAuOTEuMjEsMTYuMzEuNjIsMy4xOS4yNCw2LjM3LjU1LDkuNTQuOTMsNS4zOC42NSwxMC43MiwxLjQ5LDE2LDIuNTQsMS43LjM0LDMuNC43LDUuMSwxLjA4LDM1LjY2LDcuOTksNjguNjQsMjUuMDgsOTYuMTQsNTAuMTEsMi41MiwyLjI5LDQuOTksNC42NSw3LjQyLDcuMDcsMS4xMiwxLjEyLDIuMjIsMi4yNSwzLjMxLDMuMzkuMzEuMzMuNjMuNjYuOTQuOTkuODIuODcsMS42NCwxLjc1LDIuNDUsMi42My4yOS4zMS41Ny42Mi44Ni45NCwxLjA1LDEuMTYsMi4wOCwyLjMyLDMuMSwzLjUuMTYuMTguMzEuMzcuNDcuNTUuODcsMS4wMSwxLjczLDIuMDMsMi41OCwzLjA2LjMuMzYuNTkuNzIuODksMS4wOC43Ny45NSwxLjU0LDEuOSwyLjMsMi44Ni4yMi4yOC40NS41Ny42Ny44NS45NSwxLjIyLDEuODksMi40NCwyLjgxLDMuNjguMjEuMjguNDIuNTcuNjMuODUuNzMuOTgsMS40NCwxLjk3LDIuMTUsMi45Ny4yNy4zOC41NC43Ni44MSwxLjE1Ljc1LDEuMDYsMS40OCwyLjEzLDIuMiwzLjIuMTUuMjIuMy40My40NC42NS44NSwxLjI3LDEuNjksMi41NiwyLjUyLDMuODUuMjIuMzUuNDQuNy42NiwxLjA1LjYyLjk5LDEuMjQsMS45OSwxLjg1LDIuOTkuMjQuMzkuNDcuNzcuNywxLjE2Ljc3LDEuMjgsMS41MiwyLjU2LDIuMjYsMy44Ni4wMi4wNC4wNS4wOC4wNy4xMy43NiwxLjMzLDEuNSwyLjY4LDIuMjMsNC4wMy4yMS4zOS40Mi43OC42MywxLjE4LjQzLjgxLjg2LDEuNjIsMS4yOCwyLjQ0LjExLjIyLjIzLjQ0LjM0LjY2LjE5LjM3LjM4Ljc1LjU3LDEuMTIuNjksMS4zNiwxLjM2LDIuNzMsMi4wMiw0LjExLjA5LjIuMTguNC4yOC41OS41NywxLjIsMS4xMiwyLjQsMS42NywzLjYxLjE5LjQyLjM4Ljg0LjU2LDEuMjYuNDgsMS4wOS45NiwyLjE5LDEuNDIsMy4yOS4xLjI0LjIxLjQ4LjMxLjczLjAyLjA0LjAzLjA4LjA1LjEyLDUuNjIsMTMuNzMtNy40LDI3LjcxLTIxLjUsMjIuOTktLjEzLS4wNC0uMjUtLjA4LS4zOC0uMTNoMGMtMzYuMjctMTIuMDktODIuMDYtMTkuOTQtMTMxLjkyLTIyLjc5LTEzLjk2LS44LTI4LjI0LTEuMjEtNDIuNzItMS4yMS0xMC4zNCwwLTIwLjU5LjIxLTMwLjY4LjYyLTQuMDQuMTYtOC4wNS4zNi0xMi4wNC41OS0zLjk5LjIzLTcuOTUuNDktMTEuODkuNzgtMzkuMzQsMi45Mi03NS44LDguOTktMTA2LjU4LDE3Ljg0LTQuNjIsMS4zMy05LjExLDIuNzItMTMuNDYsNC4xNy0uMTMuMDQtLjI1LjA4LS4zOC4xMy0xNC4xMSw0LjcyLTI3LjEzLTkuMjYtMjEuNS0yMi45OFptMTMzLjMzLDI3Mi41Yy0zMC45OCw1LjY2LTc0LjI0LTE2LjE1LTEwNi44My01Ni43Ni0yOS4xNS0zNi4zMi00MS43Ny03Ny43LTM1LjM2LTEwNi44MSwyNS43NC01OC41MSwyMTEuNzcsMTM5LjQ0LDE0Mi4xOSwxNjMuNTZabTYzLjItMTE0Ljc0Yy0zMS43NiwwLTU3LjUtMjUuNzQtNTcuNS01Ny41czI1Ljc0LTU3LjUsNTcuNS01Ny41LDU3LjUsMjUuNzQsNTcuNSw1Ny41LTI1Ljc0LDU3LjUtNTcuNSw1Ny41Wm0xNjkuOTQsNTcuOThjLTMyLjU5LDQwLjYxLTc1Ljg0LDYyLjQyLTEwNi44Myw1Ni43Ni02OS41OC0yNC4xMiwxMTYuNDUtMjIyLjA4LDE0Mi4xOS0xNjMuNTYsNi40MSwyOS4xLTYuMjEsNzAuNDktMzUuMzYsMTA2LjhaIi8+PGNpcmNsZSBjeD0iMjc0Ljg1IiBjeT0iMjkzLjEzIiByPSIzMi41Ii8+PC9nPjwvZz48L3N2Zz4=" />
+                </div>
+            </div>
+        </div>
+
+        <div class="controllers-right">
+            <div class="top-container">
+    <!-- TRIM --->
+                <div id="trimShow" class="trm">
+                    <div class="blue" id="trimLeft" onclick="tright()">
+                        <---Left&nbsp;&nbsp;
+                    </div>
+                    <div class="red" id="trimRight" onclick="tleft()">
+                        &nbsp;Right-->
+                    </div>
+                </div>
+    <!-- LIGHTS --->
+                <button class="button-lights">
+                    <svg id="lightBtn" class="button-lights-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 206.83 206.83"><g><g><path d="m121.83,128.34h-38.04c0,.09.01.18,0,.28-.06.56-.08,1.08-.08,1.57v15.03h38.2v-15.03c0-.5-.03-1.01-.08-1.57,0-.09,0-.18,0-.28Z"/><path d="m91.83,51.27c-21.01,9.28-26.83,36.8-18.97,56.29,2.31,5.68,5.79,10.94,10.38,15.16.14.13.26.27.38.41h37.59c.09-.14.17-.27.28-.41,10.9-14.62,14.64-33.29,9.1-50.33-5.35-15.63-21.48-28.4-38.77-21.12Z"/><path d="m83.71,150.84c0,8.99,7.6,16.3,16.94,16.3h4.33c9.34,0,16.94-7.31,16.94-16.3v-.41h-38.2v.41Z"/><path d="m166.75,0H40.07C17.94,0,0,17.94,0,40.07v126.68c0,22.13,17.94,40.07,40.07,40.07h126.68c22.13,0,40.07-17.94,40.07-40.07V40.07c0-22.13-17.94-40.07-40.07-40.07Zm-39.51,128.43c.05.61.08,1.2.08,1.76v20.65c0,11.86-10.03,21.52-22.35,21.52h-4.33c-12.32,0-22.35-9.65-22.35-21.52v-20.65c0-.41.02-.84.05-1.28-.09-.06-.19-.1-.28-.16-16.78-12.17-23.32-34.17-19.59-53.59,4.6-27.47,31.94-49.41,60.75-37.17,18.04,7.72,28.24,26.22,29.9,44.48,1.69,17.42-5.55,37-21.88,45.96Z"/></g></g></svg>
+                </button>
+            </div>
+
+            <div class="bottom-container">
+    <!-- BRAKE --->
+                <button class="button-brake" id="btn_brake" ontouchstart="rear()" ontouchend="rearzero()" >
+                    <img class="button-brake-svg" alt="Brake" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iYnV0dG9uLWJyYWtlLXN2ZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjc1LjE1IDI3NS4yOSI+PGc+PHBhdGggZD0ibTI1Ny4yLDBIMTcuOTVDOC4wNCwwLDAsOC4wNCwwLDE3Ljk1djE5NS4xNWMwLDcuMzQsNC40MSwxMy42NSwxMC43MywxNi40M2gwcy4yMy4xLjIzLjFjMCwwLC4wMiwwLC4wMy4wMWw3MS44NCw0Mi41YzIuODgsMS45Nyw2LjM3LDMuMTMsMTAuMTMsMy4xM2g4OS4yNGMzLjc2LDAsNy4yNC0xLjE2LDEwLjEzLTMuMTNsNzEuODQtNDIuNXMuMDIsMCwuMDMtLjAxbC4yMy0uMDloMGM2LjMyLTIuNzksMTAuNzMtOS4xLDEwLjczLTE2LjQ0VjE3Ljk1YzAtOS45MS04LjA0LTE3Ljk1LTE3Ljk1LTE3Ljk1Wm0tMjEuMzMsMTQyLjI4bC04Ni40Niw4Ni40NWMtNi41NCw2LjU0LTE3LjE0LDYuNTQtMjMuNjgsMGwtODYuNDYtODYuNDRjLTYuNTQtNi41NC02LjU0LTE3LjE0LDAtMjMuNjhzMTcuMTQtNi41NCwyMy42OCwwbDc0LjYxLDc0LjYsNzQuNjItNzQuNjFjMy4yNy0zLjI3LDcuNTYtNC45LDExLjg0LTQuOXM4LjU3LDEuNjQsMTEuODQsNC45MWM2LjU0LDYuNTQsNi41NCwxNy4xNCwwLDIzLjY4Wm0wLTcyLjA0bC04Ni40Niw4Ni40NWMtNi41NCw2LjU0LTE3LjE0LDYuNTQtMjMuNjgsMEwzOS4yOCw3MC4yNWMtNi41NC02LjU0LTYuNTQtMTcuMTQsMC0yMy42OHMxNy4xNC02LjU0LDIzLjY4LDBsNzQuNjEsNzQuNiw3NC42Mi03NC42MWMzLjI3LTMuMjcsNy41Ni00LjksMTEuODQtNC45czguNTcsMS42NCwxMS44NCw0LjkxYzYuNTQsNi41NCw2LjU0LDE3LjE0LDAsMjMuNjhaIi8+PC9nPjwvc3ZnPgo=" />
+                </button>
+    <!-- ACCELERATOR --->
+                <button class="button-accelerator" id="btn_power" ontouchstart="front()" ontouchend="frontzero()">
+                    <img class="button-accelerator-svg" alt="Acelerador" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iYnV0dG9uLWFjY2VsZXJhdG9yLXN2ZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjc1LjE1IDQxMi45MyI+PGc+PHBhdGggZD0ibTI2OS45MiwxOTMuMzFoMFMxOTguODksMTguMzYsMTk4Ljg5LDE4LjM2YzAtLjAyLS4wMS0uMDMtLjAyLS4wNWwtLjE2LS4zOWgtLjAyYy00LjY1LTEwLjU1LTE1LjE5LTE3LjkzLTI3LjQ3LTE3LjkzSDMwQzEzLjQzLDAsMCwxMy40MywwLDMwdjM1Mi45M2MwLDE2LjU3LDEzLjQzLDMwLDMwLDMwaDIxNS4xNWMxNi41NywwLDMwLTEzLjQzLDMwLTMwdi0xNzIuN2MwLTYuMjgtMS45My0xMi4xMS01LjIzLTE2LjkyWm0tMzQuMDUsMTQ1Ljg5Yy02LjU0LDYuNTQtMTcuMTQsNi41NC0yMy42OCwwbC03NC42MS03NC42LTc0LjYyLDc0LjYxYy0zLjI3LDMuMjctNy41Niw0LjktMTEuODQsNC45cy04LjU3LTEuNjQtMTEuODQtNC45MWMtNi41NC02LjU0LTYuNTQtMTcuMTQsMC0yMy42OGw4Ni40Ni04Ni40NWM2LjU0LTYuNTQsMTcuMTQtNi41NCwyMy42OCwwbDg2LjQ2LDg2LjQ0YzYuNTQsNi41NCw2LjU0LDE3LjE0LDAsMjMuNjhabTAtNzIuMDRjLTYuNTQsNi41NC0xNy4xNCw2LjU0LTIzLjY4LDBsLTc0LjYxLTc0LjYtNzQuNjIsNzQuNjFjLTMuMjcsMy4yNy03LjU2LDQuOS0xMS44NCw0LjlzLTguNTctMS42NC0xMS44NC00LjkxYy02LjU0LTYuNTQtNi41NC0xNy4xNCwwLTIzLjY4bDg2LjQ2LTg2LjQ1YzYuNTQtNi41NCwxNy4xNC02LjU0LDIzLjY4LDBsODYuNDYsODYuNDRjNi41NCw2LjU0LDYuNTQsMTcuMTQsMCwyMy42OFoiLz48L2c+PC9zdmc+" />
+                </button>
+            </div>
+        </div>
+
+    <!-- Device BLE Scan Result Dialog -->
+		<!-- <div id='scabk' class='modl'>
+			<div class='dlg'>
+				<h3>Multiple Devices Found:</h3><br>
+				<p>Please select one:</p><p><select id='scRes'></select></p><br>
+				<p>
+					<button class='no' onclick='scSel(false);'>&#x2718;</button>
+					<button class='ok' onclick='scSel(true);'>&#x2714;</button>
+				</p>
+			</div>
+		</div> -->
+        
+    </main>
+
+    <!-- ---- / -- / ---- JavaScript ---- / -- / ---- -->
+
+    <script>
+
+        const uiSettings = {
+        orientation: 'landscape', // portrait, landscape, ''
+        topBarTitle: 'Ble Decode'
+        }
+
+        const uiSettingsTopBar = {
+        showTopBar: false,
+        }
+
+        //////////////////
+
+        // const defbtn2 = document.getElementById('defBtn');
+        const showTrim = document.getElementById('trimShow');
+        let count = 0;
+
+        function showTrims() {
+        count++;
+
+            switch (count) {
+                case 1:
+                showTrim.style.display = 'flex';
+                break;
+                default:
+                showTrim.style.display = 'none';
+                count = 0;
+                break;
+            }
+        }
+
+        const defbtn = document.getElementById('defBtn');
+
+        function ChangeShowTopBar() {
+        uiSettingsTopBar.showTopBar = !uiSettingsTopBar.showTopBar;
+        console.log(uiSettingsTopBar)
+        BleFunctions.loadUISettings(JSON.stringify(uiSettingsTopBar))
+        }
+
+        defbtn.addEventListener('click', ChangeShowTopBar);
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            BleFunctions.loadUISettings(JSON.stringify(uiSettings))
+        });
+
+        //////////////// JsioBleApp Connect ////////////////
+
+        const scan_obj = {
+            scan_for:		'',
+            starts_with:	false,
+            scan_time:		5,
+            app:			'{"usr":"BLE-App"}', // will receive {"brd:"..."}
+            connCB:			'BLE_ConnCB',
+            recvCB:			'BLE_RecvCB',
+            scanResultsCB:	'BLE_ScanCB',
+            serviceUUID:				'2ac506a1-63bf-422c-8c60-7acfa9e81c46',
+            writeCharacteristicUUID:	'2ac506a2-63bf-422c-8c60-7acfa9e81c46',
+            receiveCharacteristicUUID:	'2ac506a3-63bf-422c-8c60-7acfa9e81c46',
+        };
+        
+        var JsioBleClassObj;
+        function JsioBle(scf, strw, stup, cb_r, cb_c, cb_l){
+            JsioBleClassObj = new JsioBleApp(scf, strw, stup, cb_r, cb_c, cb_l);
+            return JsioBleClassObj;
+        }
+        
+        class JsioBleApp{
+            constructor(scf, strw, stup, cb_r, cb_c, cb_l){
+                scan_obj.scan_for = scf;
+                scan_obj.starts_with = strw;
+                this.setup = stup;
+                this.cb_rec = cb_r;
+                this.cb_con = cb_c;
+                this.cb_log = cb_l;
+                this.connected = false;
+                this.setup_i = 0;
+                this.setup_done = false;
+            }
+        
+            connect(){
+                if(this.connected){
+                    BleFunctions.disconnectDevice();
+                    this.setup_i = 0;
+					this.setup_done = false;
+                }else{
+                    this.cb_log(0, '{"usr":"BLE-App"}'); /*Thats a fake...*/
+                    let er = BleFunctions.startScanning(JSON.stringify(scan_obj));
+                    if(er > 0){
+                        this.cb_log(3, 'Scanning produced error #' + er);
+                    }
+                }
+            }
+            get is_connected(){return this.connected;}
+        
+            send(str){
+                BleFunctions.sendCommand(str);
+                this.cb_log(1, str);
+            }
+        
+            // setup_peri(ob){ // run the setup from the setup array.
+            //     if(ob.brd != undefined){ // called only once at startup
+            //         if(ob.brd == scan_obj.scan_for){
+            //             this.setup_i = 0;
+            //             this.setup_done = false;
+            //         }else{
+            //             this.cb_log(3, "&rarr; unknown board '"+ob.brd+"' tried to connect!");
+            //             return false;
+            //         }
+            //     }
+
+            setup_peri(ob){ // run the setup from the setup array.
+                if(ob.brd != undefined){ // called only once at startup
+                    if(scan_obj.starts_with == true){
+                        this.setup_i = 0;
+                        this.setup_done = false;
+                    }else if(ob.brd == scan_obj.scan_for){
+                        this.setup_i = 0;
+                        this.setup_done = false;
+                    }else{
+                        this.cb_log(3, "&rarr; unknown board '"+ob.brd+"' tried to connect!");
+                        return false;
+                    }
+                }
+                // TODO: test for error
+        
+                if(this.setup_done) return true;
+                if(this.setup_i > this.setup.length){
+                    this.cb_con(2,'');
+                    this.setup_done = true;
+                    return true; // setup is done
+                }else if(this.setup_i == this.setup.length){
+						this.send('{"setup":"done"}');
+					}else{
+						this.send(this.setup[this.setup_i]);
+					}
+					this.setup_i++;
+					return false;
+                // NEWCHANGE
+                // this.send(this.setup[this.setup_i]);
+                // this.setup_i++;
+                // return false;
+            }
+        
+        }
+        
+        // -------------------------> Old function (all_cars)
+        // function BLE_ScanCB(ls){
+        //     BleFunctions.connectDevice(0);
+        // }
+        
+        // function BLE_ConnCB(conn, name){
+        //     JsioBleClassObj.connected = conn;
+        //     JsioBleClassObj.cb_con(conn, name);
+        // }
+
+        function fillCombo(id, ar, sel){
+            let lst = document.getElementById(id);
+            while(lst.options.length > 0){ /* clean up */
+                lst.remove(lst.options.length - 1);
+            }
+            for(i = 0; i < ar.length; i++){
+                let opt = document.createElement('option');
+                opt.text = ar[i];
+                opt.value = i;
+                if(i == sel){
+                    opt.selected = true;
+                }
+                lst.add(opt);
+            }
+        }
+        function BLE_ScanCB(ls){
+            let list = JSON.parse(ls);
+            if(list.length > 1){
+                // fillCombo('scRes', list, 0);
+                // document.getElementById('scabk').style.display = 'block';
+            }else if(list.length == 0){
+                // document.getElementById('stat').innerHTML = '';
+                return; //document.getElementById('conbut').disabled = false;
+            }else{ // is == 1
+                // document.getElementById('stat').innerHTML = list[0];
+                BleFunctions.connectDevice(0);
+            }
+        }
+        // function scSel(is){
+        //     if(is == true){
+        //         // let x = document.getElementById('scRes').selectedIndex;
+        //         // document.getElementById('stat').innerHTML = document.getElementById('scRes').options[x].text;
+        //         BleFunctions.connectDevice(x);
+        //     }
+        //     // document.getElementById('scabk').style.display = 'none';
+        // }
+
+        function BLE_ConnCB(conn, name){
+            JsioBleClassObj.connected = conn;
+            JsioBleClassObj.cb_con(conn, name);
+        }
+        
+
+        function BLE_RecvCB(str){
+            const ob = JSON.parse(str);
+            if(ob.error != undefined && ob.error != 0){
+                JsioBleClassObj.cb_log(3, str);
+                return;
+            }else{
+                // console.log(str);
+                JsioBleClassObj.cb_log(0, str);
+            }
+            if(JsioBleClassObj.setup_peri(ob)){
+                JsioBleClassObj.cb_rec(ob);
+                // updateBattery(str);
+            }
+        }
+        //BLE_RecvCB('{"brd":"jsio.link_F412FA53FD25"}')
+
+        //////////////// JsioBleApp Code ////////////////
+
+        /* Example User program for use with the "Solder Oven".
+		* (c) 2022 JSIO Lda
+		*/
+
+		/* The Setup of the Peripherals: -------------------------------------*/
+		const setup_strings = [ /* array of setup JSON messages, please see docu for details! */
+		// NEWCHANGE
+        // '{"setup":{"PWM":48,"init":[500,50]}}',
+		// '{"setup":{"GPO":15,"init":0}}',
+		// '{"setup":{"GPO":16,"init":0}}',
+
+        '{"setup":{"system":2}}', // ignore resetups
+        '{"setup":{"system":0,"event":{"exe":{"stream":[{"GPO":15,"val":0},{"GPO":16,"val":0}]}}}}', // reset on connection loss
+        '{"setup":{"PWM":12,"init":[500,50]}}',
+        '{"setup":{"GPO":15,"init":0}}',
+        '{"setup":{"GPO":16,"init":0}}',
+        '{"setup":{"LEDS":0,"init":[11,4]}}',
+        '{"setup":{"BAT":3}}'
+		];
+
+
+		// Create a BLE connection: ----------------------------------------
+		//*
+		var cls = JsioBle(
+            // NEWCHANGE
+			// 'jsio.link_F412FAC1CFD1',
+            // false,
+            'jsio.link_',	// search for device with name starting with
+			true,						// if true, search for device-names starting with
+			setup_strings,				// the array with the JSON setup strings
+			recv_callback,				// reception callback
+			connection_callback,		// connection callback
+			add2Log);					// logging callback
+
+		function frontzero(){
+			cls.send('{"stream":{"GPO":15,"val":0}}')
+
+            rpmDown();
+		}
+		function rearzero(){
+			cls.send('{"stream":{"GPO":16,"val":0}}')
+
+            rpmDown();
+		}
+		function front(){
+			cls.send('{"stream":{"GPO":15,"val":1}}')
+
+            rpmUp();
+		}
+		function rear(){
+			cls.send('{"stream":{"GPO":16,"val":1}}')
+
+            rpmUp();
+		}
+		///////////////////////////////////////////////// wheel rotation
+		const divElement   = 'wheelElement'
+		const wheelElement = document.getElementById (divElement)
+		var last_val = 0;
+
+		const rotateWheel = function (value) {
+			var val = value
+
+			if (val >= 90) {
+				val = 90
+			} else if (val <= -90) {
+				val = -90
+			}
+
+			dif = Math.abs(last_val-val);
+		
+			if(dif > 10){
+				angulo = Math.round(val);
+				steer_ang = Math.round(75+((angulo)*25)/90);
+
+				cls.send('{"stream":{"PWM":12,"val":'+steer_ang+'}}')
+			
+				wheelElement.style.setProperty ('--rotate-deg', val + "deg");
+				last_val = val;
+			}
+		}
+
+
+		wheelElement.addEventListener ('touchmove', function (e) {
+
+		var evt   = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
+		var touch = evt.targetTouches[0];
+
+		var bnds = wheelElement.getBoundingClientRect ();
+		var x    = touch.pageX - bnds.left;
+
+		var widthOfBox = bnds.width
+
+		var deg = (x * 180) / widthOfBox
+
+		// right
+		if (deg >= 90) {
+			var degRight = deg - 90
+			rotateWheel (degRight)
+		} else {
+			var degLeft = (deg - 90)
+			rotateWheel (degLeft)
+		}
+		})
+
+		wheelElement.addEventListener ('touchend', function () {
+		rotateWheel (0)
+		})
+		/////////////////////////////////////////////////
+
+        ///////////////////////////////////////////////// ----->     RPM   <-----
+
+        const elementsIds = ['rpmColor_1', 'rpmColor_2', 'rpmColor_3', 'rpmColor_4', 'rpmColor_5', 'rpmColor_6', 'rpmColor_7', 'rpmColor_8', 'rpmColor_9', 'rpmColor_10'];
+
+        let timeouts = [];
+
+        function rpmUp() {
+            for (let i = 0; i < elementsIds.length; i++) {
+                const elementId = elementsIds[i];
+                const timeoutId = setTimeout(() => {
+                const element = document.getElementById(elementId);
+                element.style.backgroundColor = '#00C800';
+                }, (i + 1) * 45);
+                timeouts.push(timeoutId);
+            }
+        }
+
+        function rpmDown() {
+        timeouts.forEach(timeoutId => {
+            clearTimeout(timeoutId);
+        });
+        timeouts = [];
+
+        elementsIds.forEach(elementId => {
+            const element = document.getElementById(elementId);
+            element.style.backgroundColor = '#FFFFFF';
+        });
+        }
+
+        /////////////////////////////////////////////////
+
+        /*The receiving call-back: -------------------------------------------*/
+        function recv_callback(ob){
+            if(ob.stream != undefined){
+                if(ob.stream.BAT != undefined){
+                    let x = ob.stream.BAT;
+                    document.getElementById("battery-percentage").innerHTML = x + '%';
+                    document.getElementById("batlvl").style.width = ((x>20) ? x : 20) + '%';
+                    let clr = '#06b700';
+                    if(x <= 20) clr = '#c40000';
+                    else if(x <= 50) clr = '#ccdb00';
+                    document.getElementById("batlvl").style.backgroundColor = clr;
+                }
+            }
+        }
+
+		/*The connection call-back: ------------------------------------------*/
+		function connection_callback(conn){
+			switch(conn){
+				case 0:
+                    document.getElementById("battery-percentage").innerHTML = '';
+                    document.getElementById("batlvl").style.width = 0;
+                    // drawtacho(0);
+					document.getElementById('conbut').style.color = '#D20000';
+                    // cls.send('{"stream":{"LEDS":0,"val":[0, 0, 0, 0]}}');
+					break;
+				case 1: /* BLE has connected to device */
+					document.getElementById('conbut').style.color = '#FFDC3C';
+                    // cls.send('{"stream":{"LEDS":0,"val":[13762560, 13762560, 13762560, 13762560]}}');
+					break;
+				case 2: /* setup has finished */
+                    document.getElementById('conbut').style.color = '#00C800';
+                    // cls.send('{"stream":{"LEDS":0,"val":[51200, 51200, 51200, 51200]}}');
+					break;
+				/*TODO: case 4: error during setup! */
+			}
+		}
+
+		/*The (Dis)Connection: ------------------------------------------------*/
+		function connection(){
+			// For WebSockets: This example is for 1 single connection only!
+			cls.connect();
+		}
+
+		/* Logging: ------------------------------------------------------------*/
+		var logbuffer = "";
+		/* add2Log 1st parameter is type: 0:Input, 1:Output, 2:System, 3:Error
+		* The 2nd parameter is the text to log. */
+		function add2Log(type, str){
+			// switch(type){
+			// 	case 0: logbuffer += '<br>&compfn;&rarr; ' + str; break;
+			// 	case 1: logbuffer += '<br>&larr;&compfn; ' + str; break;
+			// 	case 2: logbuffer += '<br><b style="color:#ff0;">' + str + '</b>'; break;
+			// 	case 3: logbuffer += '<br><b style="color:red;">' + str + '</b>'; break;
+			// }
+		}
+
+        //////////////// Animação Batery Count Down ////////////////
+
+        // const color1 = document.getElementById('batteryColor1');
+        // const color2 = document.getElementById('batteryColor2');
+        // const color3 = document.getElementById('batteryColor3');
+        // const color4 = document.getElementById('batteryColor4');
+        // const color5 = document.getElementById('batteryColor5');
+        // const color6 = document.getElementById('batteryColor6');
+        // const color7 = document.getElementById('batteryColor7');
+        // const color8 = document.getElementById('batteryColor8');
+        // const color9 = document.getElementById('batteryColor9');
+        // const color10 = document.getElementById('batteryColor10');
+
+        // function updateBattery(str) {
+        //     const ob = JSON.parse(str);
+        //     const batteryPercentage = ob.stream.BAT;
+        //     const countdown = document.getElementById('countdown');
+        //     countdown.textContent = batteryPercentage + '%';
+
+        //     if (batteryPercentage >= 90) {
+        //         color1.style.color = '#00C800';
+        //         color2.style.color = '#00C800';
+        //         color3.style.color = '#00C800';
+        //         color4.style.color = '#00C800';
+        //         color5.style.color = '#00C800';
+        //         color6.style.color = '#00C800';
+        //         color7.style.color = '#00C800';
+        //         color8.style.color = '#00C800';
+        //         color9.style.color = '#00C800';
+        //         color10.style.color = '#00C800';
+        //     } else if (batteryPercentage >= 80) {
+        //         color1.style.color = '#00C800';
+        //         color2.style.color = '#00C800';
+        //         color3.style.color = '#00C800';
+        //         color4.style.color = '#00C800';
+        //         color5.style.color = '#00C800';
+        //         color6.style.color = '#00C800';
+        //         color7.style.color = '#00C800';
+        //         color8.style.color = '#00C800';
+        //         color9.style.color = '#00C800';
+        //         color10.style.color = '#FFFFFF';
+        //     } else if (batteryPercentage >= 70) {
+        //         color1.style.color = '#00C800';
+        //         color2.style.color = '#00C800';
+        //         color3.style.color = '#00C800';
+        //         color4.style.color = '#00C800';
+        //         color5.style.color = '#00C800';
+        //         color6.style.color = '#00C800';
+        //         color7.style.color = '#00C800';
+        //         color8.style.color = '#00C800';
+        //         color9.style.color = '#FFFFFF';
+        //         color10.style.color = '#FFFFFF';
+        //     } else if (batteryPercentage >= 60) {
+        //         color1.style.color = '#00C800';
+        //         color2.style.color = '#00C800';
+        //         color3.style.color = '#00C800';
+        //         color4.style.color = '#00C800';
+        //         color5.style.color = '#00C800';
+        //         color6.style.color = '#00C800';
+        //         color7.style.color = '#00C800';
+        //         color8.style.color = '#FFFFFF';
+        //         color9.style.color = '#FFFFFF';
+        //         color10.style.color = '#FFFFFF';
+        //     } else if (batteryPercentage >= 50) {
+        //         color1.style.color = '#FFDC3C';
+        //         color2.style.color = '#FFDC3C';
+        //         color3.style.color = '#FFDC3C';
+        //         color4.style.color = '#FFDC3C';
+        //         color5.style.color = '#FFDC3C';
+        //         color6.style.color = '#FFDC3C';
+        //         color7.style.color = '#FFFFFF';
+        //         color8.style.color = '#FFFFFF';
+        //         color9.style.color = '#FFFFFF';
+        //         color10.style.color = '#FFFFFF';
+        //     } else if (batteryPercentage >= 40) {
+        //         color1.style.color = '#FFDC3C';
+        //         color2.style.color = '#FFDC3C';
+        //         color3.style.color = '#FFDC3C';
+        //         color4.style.color = '#FFDC3C';
+        //         color5.style.color = '#FFDC3C';
+        //         color6.style.color = '#FFFFFF';
+        //         color7.style.color = '#FFFFFF';
+        //         color8.style.color = '#FFFFFF';
+        //         color9.style.color = '#FFFFFF';
+        //         color10.style.color = '#FFFFFF';
+        //     } else if (batteryPercentage >= 30) {
+        //         color1.style.color = '#FFDC3C';
+        //         color2.style.color = '#FFDC3C';
+        //         color3.style.color = '#FFDC3C';
+        //         color4.style.color = '#FFDC3C';
+        //         color5.style.color = '#FFFFFF';
+        //         color6.style.color = '#FFFFFF';
+        //         color7.style.color = '#FFFFFF';
+        //         color8.style.color = '#FFFFFF';
+        //         color9.style.color = '#FFFFFF';
+        //         color10.style.color = '#FFFFFF';
+        //     } else if (batteryPercentage >= 20) {
+        //         color1.style.color = '#D20000';
+        //         color2.style.color = '#D20000';
+        //         color3.style.color = '#D20000';
+        //         color4.style.color = '#FFFFFF';
+        //         color5.style.color = '#FFFFFF';
+        //         color6.style.color = '#FFFFFF';
+        //         color7.style.color = '#FFFFFF';
+        //         color8.style.color = '#FFFFFF';
+        //         color9.style.color = '#FFFFFF';
+        //         color10.style.color = '#FFFFFF';
+        //     } else if (batteryPercentage >= 10) {
+        //         color1.style.color = '#D20000';
+        //         color2.style.color = '#D20000';
+        //         color3.style.color = '#FFFFFF';
+        //         color4.style.color = '#FFFFFF';
+        //         color5.style.color = '#FFFFFF';
+        //         color6.style.color = '#FFFFFF';
+        //         color7.style.color = '#FFFFFF';
+        //         color8.style.color = '#FFFFFF';
+        //         color9.style.color = '#FFFFFF';
+        //         color10.style.color = '#FFFFFF';
+        //     } else if (batteryPercentage >= 1) {
+        //         color1.style.color = '#D20000';
+        //         color2.style.color = '#FFFFFF';
+        //         color3.style.color = '#FFFFFF';
+        //         color4.style.color = '#FFFFFF';
+        //         color5.style.color = '#FFFFFF';
+        //         color6.style.color = '#FFFFFF';
+        //         color7.style.color = '#FFFFFF';
+        //         color8.style.color = '#FFFFFF';
+        //         color9.style.color = '#FFFFFF';
+        //         color10.style.color = '#FFFFFF';
+        //     } else {
+        //         color1.style.color = '#FFFFFF';
+        //         color2.style.color = '#FFFFFF';
+        //         color3.style.color = '#FFFFFF';
+        //         color4.style.color = '#FFFFFF';
+        //         color5.style.color = '#FFFFFF';
+        //         color6.style.color = '#FFFFFF';
+        //         color7.style.color = '#FFFFFF';
+        //         color8.style.color = '#FFFFFF';
+        //         color9.style.color = '#FFFFFF';
+        //         color10.style.color = '#FFFFFF';
+        //     }
+        // }
+
+        /////////////////////////// LIGHTS ///////////////////////////
+
+        //LIGHTS
+
+        //GREEN = 49152
+        //RED = 255
+        //BLUE = 16776960
+        //WHITE = 16769056
+        //YELLOW = 
+        //PURPLE = 16724889
+      
+        const lgtbtn = document.getElementById('lightBtn');
+        // const changeLight = document.getElementById('changeToLight');
+        let counter = 0;
+
+        lgtbtn.addEventListener('touchstart', changeBackgroundColor);
+
+        function changeBackgroundColor() {
+            counter++;
+
+            switch (counter) {
+                default:
+                cls.send('{"stream":{"LEDS":0,"val":[0, 0, 0, 0]}}');
+                lgtbtn.style.color = '#404040';
+                counter = 0;
+                break;
+
+                case 1:
+                cls.send('{"stream":{"LEDS":0,"val":[49152, 49152, 49152, 49152]}}');
+                lgtbtn.style.color = '#7685F7';
+                break;
+
+                case 2:
+                cls.send('{"stream":{"TIM":0,"val":[1000,-1],"event":{"stream":{"LEDS":0,"val":[255, 255, 16776960, 16776960]}}}}');
+                cls.send('{"stream":{"TIM":1,"val":[500,-1],"event":{"stream":{"TIM":1,"val":[1000,-1],"event":{"stream":{"LEDS":0,"val":[16776960, 16776960, 255, 255]}}}}}}');
+                lgtbtn.style.color = '#E34234';
+                break;
+
+                case 3:
+                cls.send('{"stream":{"TIM":0,"val":[500,-1],"event":{"stream":{"LEDS":0,"val":[255, 255, 255, 255]}}}}');
+                cls.send('{"stream":{"TIM":1,"val":[250,-1],"event":{"stream":{"TIM":1,"val":[500,-1],"event":{"stream":{"LEDS":0,"val":[16776960, 16776960, 16776960, 16776960]}}}}}}');
+                lgtbtn.style.color = '#43DE8B';
+                break;
+
+                case 4:
+                cls.send('{"stream":{"TIM":0,"val":[0,0],"event":{}}}');
+                cls.send('{"stream":{"TIM":1,"val":[0,0],"event":{}}}');
+                cls.send('{"stream":{"LEDS":0,"val":[16777011, 49152, 15790080, 255]}}');
+                lgtbtn.style.color = '#F7875B';
+                break;
+            }
+        }
+
+        /////////////////////////// TRIM ///////////////////////////
+
+
+        //TRIM
+        var trim = 73;
+        function tright(){
+        if(trim < 83){
+        trim++;
+        cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
+        }
+        } 
+        function tleft(){
+        if(trim > 63){
+        trim--;
+        cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
+        }
+        } 
+        // ----- / ----- LEFT // RIGHT ---- / ------
+        // function left(){
+        // cls.send('{"stream":{"PWM":12,"val":46}}');
+        // }
+        // function right(){
+        // cls.send('{"stream":{"PWM":12,"val":106}}');
+        // }
+        // function center(){
+        // cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
+        // }
+
+        // function blur(){
+        //     cls.send('{"stream":{"LEDS":0,"val":[49152, 49152, 49152, 49152]}}')
+        // }
+
+        
+    </script>
+
+</body>
+</html>
