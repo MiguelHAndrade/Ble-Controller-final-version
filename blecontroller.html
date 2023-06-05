@@ -108,23 +108,6 @@
             color: #FFFFFF;
         }
 
-        /* .battery-percentage{
-            height: 12.5vh;
-            width: 9vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .battery-percentage{
-            font-family: 'Inter', sans-serif;
-            margin: 0 6.25vw 0 1vw;
-            color: #FFFFFF;
-            font-size: 6.25vh;
-            font-weight: bold;
-            user-select: none;
-        } */
-
         .rpm{
             height: 6.25vh;
             width: calc(100% / 3);
@@ -490,40 +473,14 @@
             color:red;
             font-size:20px;
         }
-        select{padding:10px;}
-        /* .modl{
-            display:none;
-            position: fixed;
-            z-index:1;
-            padding-top:10px;
-            left:0;
-            top:0;
-            width:100%;
-            height:100%;
-            overflow:auto;
-            background-color:rgb(0,0,0);
-            background-color:rgba(0,0,0,0.75);
-        } */
-        /* .dlg{
-            position: fixed;
-            width:90%;
-            left:50%;
-            top:50%;
-            max-width:640px;
-            transform:translate(-50%,-50%);
-            margin:auto;
+        select{
             padding:10px;
-            border:2px solid #A0A0A0;
-            border-radius:8px;
-            background-color:#707070;
-            text-align: center;
-        } */
+        }
 
         #battery-percentage{
             font-size: 6.25vh;
             font-weight: 600;
             padding-left: 15vw;
-            /* padding-top: 4.5vh; */
             font-family: Arial, Helvetica, sans-serif;
             color: white;
             user-select: none;
@@ -635,18 +592,6 @@
                 </button>
             </div>
         </div>
-
-    <!-- Device BLE Scan Result Dialog -->
-		<!-- <div id='scabk' class='modl'>
-			<div class='dlg'>
-				<h3>Multiple Devices Found:</h3><br>
-				<p>Please select one:</p><p><select id='scRes'></select></p><br>
-				<p>
-					<button class='no' onclick='scSel(false);'>&#x2718;</button>
-					<button class='ok' onclick='scSel(true);'>&#x2714;</button>
-				</p>
-			</div>
-		</div> -->
         
     </main>
 
@@ -665,7 +610,6 @@
 
         //////////////////
 
-        // const defbtn2 = document.getElementById('defBtn');
         const showTrim = document.getElementById('trimShow');
         let count = 0;
 
@@ -750,17 +694,6 @@
                 BleFunctions.sendCommand(str);
                 this.cb_log(1, str);
             }
-        
-            // setup_peri(ob){ // run the setup from the setup array.
-            //     if(ob.brd != undefined){ // called only once at startup
-            //         if(ob.brd == scan_obj.scan_for){
-            //             this.setup_i = 0;
-            //             this.setup_done = false;
-            //         }else{
-            //             this.cb_log(3, "&rarr; unknown board '"+ob.brd+"' tried to connect!");
-            //             return false;
-            //         }
-            //     }
 
             setup_peri(ob){ // run the setup from the setup array.
                 if(ob.brd != undefined){ // called only once at startup
@@ -782,30 +715,16 @@
                     this.cb_con(2,'');
                     this.setup_done = true;
                     return true; // setup is done
-                }else if(this.setup_i == this.setup.length){
-						this.send('{"setup":"done"}');
-					}else{
-						this.send(this.setup[this.setup_i]);
-					}
-					this.setup_i++;
-					return false;
-                // NEWCHANGE
-                // this.send(this.setup[this.setup_i]);
-                // this.setup_i++;
-                // return false;
+                } else if(this.setup_i == this.setup.length){
+                    this.send('{"setup":"done"}');
+                }else{
+                    this.send(this.setup[this.setup_i]);
+                }
+                this.setup_i++;
+                return false;
             }
         
         }
-        
-        // -------------------------> Old function (all_cars)
-        // function BLE_ScanCB(ls){
-        //     BleFunctions.connectDevice(0);
-        // }
-        
-        // function BLE_ConnCB(conn, name){
-        //     JsioBleClassObj.connected = conn;
-        //     JsioBleClassObj.cb_con(conn, name);
-        // }
 
         function fillCombo(id, ar, sel){
             let lst = document.getElementById(id);
@@ -826,23 +745,13 @@
             let list = JSON.parse(ls);
             if(list.length > 1){
                 // fillCombo('scRes', list, 0);
-                // document.getElementById('scabk').style.display = 'block';
             }else if(list.length == 0){
-                // document.getElementById('stat').innerHTML = '';
                 return; //document.getElementById('conbut').disabled = false;
-            }else{ // is == 1
-                // document.getElementById('stat').innerHTML = list[0];
+            }else{
                 BleFunctions.connectDevice(0);
             }
         }
-        // function scSel(is){
-        //     if(is == true){
-        //         // let x = document.getElementById('scRes').selectedIndex;
-        //         // document.getElementById('stat').innerHTML = document.getElementById('scRes').options[x].text;
-        //         BleFunctions.connectDevice(x);
-        //     }
-        //     // document.getElementById('scabk').style.display = 'none';
-        // }
+
 
         function BLE_ConnCB(conn, name){
             JsioBleClassObj.connected = conn;
@@ -856,12 +765,10 @@
                 JsioBleClassObj.cb_log(3, str);
                 return;
             }else{
-                // console.log(str);
                 JsioBleClassObj.cb_log(0, str);
             }
             if(JsioBleClassObj.setup_peri(ob)){
                 JsioBleClassObj.cb_rec(ob);
-                // updateBattery(str);
             }
         }
         //BLE_RecvCB('{"brd":"jsio.link_F412FA53FD25"}')
@@ -874,11 +781,7 @@
 
 		/* The Setup of the Peripherals: -------------------------------------*/
 		const setup_strings = [ /* array of setup JSON messages, please see docu for details! */
-		// NEWCHANGE
-        // '{"setup":{"PWM":48,"init":[500,50]}}',
-		// '{"setup":{"GPO":15,"init":0}}',
-		// '{"setup":{"GPO":16,"init":0}}',
-
+        
         '{"setup":{"system":2}}', // ignore resetups
         '{"setup":{"system":0,"event":{"exe":{"stream":[{"GPO":15,"val":0},{"GPO":16,"val":0}]}}}}', // reset on connection loss
         '{"setup":{"PWM":12,"init":[500,50]}}',
@@ -892,9 +795,6 @@
 		// Create a BLE connection: ----------------------------------------
 		//*
 		var cls = JsioBle(
-            // NEWCHANGE
-			// 'jsio.link_F412FAC1CFD1',
-            // false,
             'jsio.link_',	// search for device with name starting with
 			true,						// if true, search for device-names starting with
 			setup_strings,				// the array with the JSON setup strings
@@ -1029,17 +929,16 @@
 				case 0:
                     document.getElementById("battery-percentage").innerHTML = '';
                     document.getElementById("batlvl").style.width = 0;
-                    // drawtacho(0);
 					document.getElementById('conbut').style.color = '#D20000';
-                    // cls.send('{"stream":{"LEDS":0,"val":[0, 0, 0, 0]}}');
+                    // cls.send('{"stream":{"LEDS":0,"val":[0, 0, 0, 0]}}');    // lights OFF
 					break;
 				case 1: /* BLE has connected to device */
 					document.getElementById('conbut').style.color = '#FFDC3C';
-                    // cls.send('{"stream":{"LEDS":0,"val":[13762560, 13762560, 13762560, 13762560]}}');
+                    // cls.send('{"stream":{"LEDS":0,"val":[13762560, 13762560, 13762560, 13762560]}}');    // lights red
 					break;
 				case 2: /* setup has finished */
                     document.getElementById('conbut').style.color = '#00C800';
-                    // cls.send('{"stream":{"LEDS":0,"val":[51200, 51200, 51200, 51200]}}');
+                    // cls.send('{"stream":{"LEDS":0,"val":[51200, 51200, 51200, 51200]}}');    // lights green
 					break;
 				/*TODO: case 4: error during setup! */
 			}
@@ -1063,149 +962,6 @@
 			// 	case 3: logbuffer += '<br><b style="color:red;">' + str + '</b>'; break;
 			// }
 		}
-
-        //////////////// Animação Batery Count Down ////////////////
-
-        // const color1 = document.getElementById('batteryColor1');
-        // const color2 = document.getElementById('batteryColor2');
-        // const color3 = document.getElementById('batteryColor3');
-        // const color4 = document.getElementById('batteryColor4');
-        // const color5 = document.getElementById('batteryColor5');
-        // const color6 = document.getElementById('batteryColor6');
-        // const color7 = document.getElementById('batteryColor7');
-        // const color8 = document.getElementById('batteryColor8');
-        // const color9 = document.getElementById('batteryColor9');
-        // const color10 = document.getElementById('batteryColor10');
-
-        // function updateBattery(str) {
-        //     const ob = JSON.parse(str);
-        //     const batteryPercentage = ob.stream.BAT;
-        //     const countdown = document.getElementById('countdown');
-        //     countdown.textContent = batteryPercentage + '%';
-
-        //     if (batteryPercentage >= 90) {
-        //         color1.style.color = '#00C800';
-        //         color2.style.color = '#00C800';
-        //         color3.style.color = '#00C800';
-        //         color4.style.color = '#00C800';
-        //         color5.style.color = '#00C800';
-        //         color6.style.color = '#00C800';
-        //         color7.style.color = '#00C800';
-        //         color8.style.color = '#00C800';
-        //         color9.style.color = '#00C800';
-        //         color10.style.color = '#00C800';
-        //     } else if (batteryPercentage >= 80) {
-        //         color1.style.color = '#00C800';
-        //         color2.style.color = '#00C800';
-        //         color3.style.color = '#00C800';
-        //         color4.style.color = '#00C800';
-        //         color5.style.color = '#00C800';
-        //         color6.style.color = '#00C800';
-        //         color7.style.color = '#00C800';
-        //         color8.style.color = '#00C800';
-        //         color9.style.color = '#00C800';
-        //         color10.style.color = '#FFFFFF';
-        //     } else if (batteryPercentage >= 70) {
-        //         color1.style.color = '#00C800';
-        //         color2.style.color = '#00C800';
-        //         color3.style.color = '#00C800';
-        //         color4.style.color = '#00C800';
-        //         color5.style.color = '#00C800';
-        //         color6.style.color = '#00C800';
-        //         color7.style.color = '#00C800';
-        //         color8.style.color = '#00C800';
-        //         color9.style.color = '#FFFFFF';
-        //         color10.style.color = '#FFFFFF';
-        //     } else if (batteryPercentage >= 60) {
-        //         color1.style.color = '#00C800';
-        //         color2.style.color = '#00C800';
-        //         color3.style.color = '#00C800';
-        //         color4.style.color = '#00C800';
-        //         color5.style.color = '#00C800';
-        //         color6.style.color = '#00C800';
-        //         color7.style.color = '#00C800';
-        //         color8.style.color = '#FFFFFF';
-        //         color9.style.color = '#FFFFFF';
-        //         color10.style.color = '#FFFFFF';
-        //     } else if (batteryPercentage >= 50) {
-        //         color1.style.color = '#FFDC3C';
-        //         color2.style.color = '#FFDC3C';
-        //         color3.style.color = '#FFDC3C';
-        //         color4.style.color = '#FFDC3C';
-        //         color5.style.color = '#FFDC3C';
-        //         color6.style.color = '#FFDC3C';
-        //         color7.style.color = '#FFFFFF';
-        //         color8.style.color = '#FFFFFF';
-        //         color9.style.color = '#FFFFFF';
-        //         color10.style.color = '#FFFFFF';
-        //     } else if (batteryPercentage >= 40) {
-        //         color1.style.color = '#FFDC3C';
-        //         color2.style.color = '#FFDC3C';
-        //         color3.style.color = '#FFDC3C';
-        //         color4.style.color = '#FFDC3C';
-        //         color5.style.color = '#FFDC3C';
-        //         color6.style.color = '#FFFFFF';
-        //         color7.style.color = '#FFFFFF';
-        //         color8.style.color = '#FFFFFF';
-        //         color9.style.color = '#FFFFFF';
-        //         color10.style.color = '#FFFFFF';
-        //     } else if (batteryPercentage >= 30) {
-        //         color1.style.color = '#FFDC3C';
-        //         color2.style.color = '#FFDC3C';
-        //         color3.style.color = '#FFDC3C';
-        //         color4.style.color = '#FFDC3C';
-        //         color5.style.color = '#FFFFFF';
-        //         color6.style.color = '#FFFFFF';
-        //         color7.style.color = '#FFFFFF';
-        //         color8.style.color = '#FFFFFF';
-        //         color9.style.color = '#FFFFFF';
-        //         color10.style.color = '#FFFFFF';
-        //     } else if (batteryPercentage >= 20) {
-        //         color1.style.color = '#D20000';
-        //         color2.style.color = '#D20000';
-        //         color3.style.color = '#D20000';
-        //         color4.style.color = '#FFFFFF';
-        //         color5.style.color = '#FFFFFF';
-        //         color6.style.color = '#FFFFFF';
-        //         color7.style.color = '#FFFFFF';
-        //         color8.style.color = '#FFFFFF';
-        //         color9.style.color = '#FFFFFF';
-        //         color10.style.color = '#FFFFFF';
-        //     } else if (batteryPercentage >= 10) {
-        //         color1.style.color = '#D20000';
-        //         color2.style.color = '#D20000';
-        //         color3.style.color = '#FFFFFF';
-        //         color4.style.color = '#FFFFFF';
-        //         color5.style.color = '#FFFFFF';
-        //         color6.style.color = '#FFFFFF';
-        //         color7.style.color = '#FFFFFF';
-        //         color8.style.color = '#FFFFFF';
-        //         color9.style.color = '#FFFFFF';
-        //         color10.style.color = '#FFFFFF';
-        //     } else if (batteryPercentage >= 1) {
-        //         color1.style.color = '#D20000';
-        //         color2.style.color = '#FFFFFF';
-        //         color3.style.color = '#FFFFFF';
-        //         color4.style.color = '#FFFFFF';
-        //         color5.style.color = '#FFFFFF';
-        //         color6.style.color = '#FFFFFF';
-        //         color7.style.color = '#FFFFFF';
-        //         color8.style.color = '#FFFFFF';
-        //         color9.style.color = '#FFFFFF';
-        //         color10.style.color = '#FFFFFF';
-        //     } else {
-        //         color1.style.color = '#FFFFFF';
-        //         color2.style.color = '#FFFFFF';
-        //         color3.style.color = '#FFFFFF';
-        //         color4.style.color = '#FFFFFF';
-        //         color5.style.color = '#FFFFFF';
-        //         color6.style.color = '#FFFFFF';
-        //         color7.style.color = '#FFFFFF';
-        //         color8.style.color = '#FFFFFF';
-        //         color9.style.color = '#FFFFFF';
-        //         color10.style.color = '#FFFFFF';
-        //     }
-        // }
 
         /////////////////////////// LIGHTS ///////////////////////////
 
@@ -1236,61 +992,46 @@
 
                 case 1:
                 cls.send('{"stream":{"LEDS":0,"val":[49152, 49152, 49152, 49152]}}');
-                lgtbtn.style.color = '#7685F7';
+                lgtbtn.style.color = 'green';
                 break;
 
                 case 2:
                 cls.send('{"stream":{"TIM":0,"val":[1000,-1],"event":{"stream":{"LEDS":0,"val":[255, 255, 16776960, 16776960]}}}}');
                 cls.send('{"stream":{"TIM":1,"val":[500,-1],"event":{"stream":{"TIM":1,"val":[1000,-1],"event":{"stream":{"LEDS":0,"val":[16776960, 16776960, 255, 255]}}}}}}');
-                lgtbtn.style.color = '#E34234';
+                lgtbtn.style.color = 'red';
                 break;
 
                 case 3:
                 cls.send('{"stream":{"TIM":0,"val":[500,-1],"event":{"stream":{"LEDS":0,"val":[255, 255, 255, 255]}}}}');
                 cls.send('{"stream":{"TIM":1,"val":[250,-1],"event":{"stream":{"TIM":1,"val":[500,-1],"event":{"stream":{"LEDS":0,"val":[16776960, 16776960, 16776960, 16776960]}}}}}}');
-                lgtbtn.style.color = '#43DE8B';
+                lgtbtn.style.color = 'blue';
                 break;
 
                 case 4:
                 cls.send('{"stream":{"TIM":0,"val":[0,0],"event":{}}}');
                 cls.send('{"stream":{"TIM":1,"val":[0,0],"event":{}}}');
-                cls.send('{"stream":{"LEDS":0,"val":[16777011, 49152, 15790080, 255]}}');
-                lgtbtn.style.color = '#F7875B';
+                cls.send('{"stream":{"LEDS":0,"val":[16777011, 49152, 15790080, 16724889]}}');
+                lgtbtn.style.color = 'purple';
                 break;
             }
         }
 
         /////////////////////////// TRIM ///////////////////////////
 
-
         //TRIM
         var trim = 73;
         function tright(){
-        if(trim < 83){
-        trim++;
-        cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
-        }
+            if(trim < 83){
+            trim++;
+            cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
+            }
         } 
         function tleft(){
-        if(trim > 63){
-        trim--;
-        cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
+            if(trim > 63){
+            trim--;
+            cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
+            }
         }
-        } 
-        // ----- / ----- LEFT // RIGHT ---- / ------
-        // function left(){
-        // cls.send('{"stream":{"PWM":12,"val":46}}');
-        // }
-        // function right(){
-        // cls.send('{"stream":{"PWM":12,"val":106}}');
-        // }
-        // function center(){
-        // cls.send('{"stream":{"PWM":12,"val":'+trim+'}}');
-        // }
-
-        // function blur(){
-        //     cls.send('{"stream":{"LEDS":0,"val":[49152, 49152, 49152, 49152]}}')
-        // }
 
         
     </script>
